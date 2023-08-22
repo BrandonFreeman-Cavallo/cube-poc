@@ -1,0 +1,376 @@
+cubes:
+  - name: so_p30300
+    sql_table: dbo.SOP30300
+    data_source: default
+
+    joins: []
+
+    dimensions:
+      - name: sopnumbe
+        sql: SOPNUMBE
+        type: string
+
+      - name: itemnmbr
+        sql: ITEMNMBR
+        type: string
+
+      - name: itemdesc
+        sql: ITEMDESC
+        type: string
+
+      - name: uofm
+        sql: UOFM
+        type: string
+
+      - name: locncode
+        sql: LOCNCODE
+        type: string
+
+      - name: unitcost
+        sql: UNITCOST
+        type: string
+
+      - name: oruntcst
+        sql: ORUNTCST
+        type: string
+
+      - name: unitprce
+        sql: UNITPRCE
+        type: string
+
+      - name: oruntprc
+        sql: ORUNTPRC
+        type: string
+
+      - name: xtndprce
+        sql: XTNDPRCE
+        type: string
+
+      - name: oxtndprc
+        sql: OXTNDPRC
+        type: string
+
+      - name: remprice
+        sql: REMPRICE
+        type: string
+
+      - name: oreprice
+        sql: OREPRICE
+        type: string
+
+      - name: extdcost
+        sql: EXTDCOST
+        type: string
+
+      - name: orextcst
+        sql: OREXTCST
+        type: string
+
+      - name: mrkdnamt
+        sql: MRKDNAMT
+        type: string
+
+      - name: ormrkdam
+        sql: ORMRKDAM
+        type: string
+
+      - name: itmtshid
+        sql: ITMTSHID
+        type: string
+
+      - name: bktslsam
+        sql: BKTSLSAM
+        type: string
+
+      - name: orbktsls
+        sql: ORBKTSLS
+        type: string
+
+      - name: taxamnt
+        sql: TAXAMNT
+        type: string
+
+      - name: ortaxamt
+        sql: ORTAXAMT
+        type: string
+
+      - name: txbtxamt
+        sql: TXBTXAMT
+        type: string
+
+      - name: otaxtamt
+        sql: OTAXTAMT
+        type: string
+
+      - name: trdisamt
+        sql: TRDISAMT
+        type: string
+
+      - name: ortdisam
+        sql: ORTDISAM
+        type: string
+
+      - name: discsale
+        sql: DISCSALE
+        type: string
+
+      - name: ordavsls
+        sql: ORDAVSLS
+        type: string
+
+      - name: quantity
+        sql: QUANTITY
+        type: string
+
+      - name: atyalloc
+        sql: ATYALLOC
+        type: string
+
+      - name: qtyinsvc
+        sql: QTYINSVC
+        type: string
+
+      - name: qtyinuse
+        sql: QTYINUSE
+        type: string
+
+      - name: qtydmged
+        sql: QTYDMGED
+        type: string
+
+      - name: qtyrtrnd
+        sql: QTYRTRND
+        type: string
+
+      - name: qtyonhnd
+        sql: QTYONHND
+        type: string
+
+      - name: qtycance
+        sql: QTYCANCE
+        type: string
+
+      - name: qtycanot
+        sql: QTYCANOT
+        type: string
+
+      - name: qtyorder
+        sql: QTYORDER
+        type: string
+
+      - name: qtyprbac
+        sql: QTYPRBAC
+        type: string
+
+      - name: qtyprboo
+        sql: QTYPRBOO
+        type: string
+
+      - name: qtyprinv
+        sql: QTYPRINV
+        type: string
+
+      - name: qtyprord
+        sql: QTYPRORD
+        type: string
+
+      - name: qtyprvrecvd
+        sql: QTYPRVRECVD
+        type: string
+
+      - name: qtyrecvd
+        sql: QTYRECVD
+        type: string
+
+      - name: qtyremai
+        sql: QTYREMAI
+        type: string
+
+      - name: qtyrembo
+        sql: QTYREMBO
+        type: string
+
+      - name: qtytbaor
+        sql: QTYTBAOR
+        type: string
+
+      - name: qtytoinv
+        sql: QTYTOINV
+        type: string
+
+      - name: qtytordr
+        sql: QTYTORDR
+        type: string
+
+      - name: qtyfulfi
+        sql: QTYFULFI
+        type: string
+
+      - name: qtyslctd
+        sql: QTYSLCTD
+        type: string
+
+      - name: qtybsuom
+        sql: QTYBSUOM
+        type: string
+
+      - name: extqtyal
+        sql: EXTQTYAL
+        type: string
+
+      - name: extqtysel
+        sql: EXTQTYSEL
+        type: string
+
+      - name: shipmthd
+        sql: SHIPMTHD
+        type: string
+
+      - name: salsterr
+        sql: SALSTERR
+        type: string
+
+      - name: slprsnid
+        sql: SLPRSNID
+        type: string
+
+      - name: prclevel
+        sql: PRCLEVEL
+        type: string
+
+      - name: commntid
+        sql: COMMNTID
+        type: string
+
+      - name: trxsorce
+        sql: TRXSORCE
+        type: string
+
+      - name: soplnerr
+        sql: SOPLNERR
+        type: string
+
+      - name: docncorr
+        sql: DOCNCORR
+        type: string
+
+      - name: itemcode
+        sql: ITEMCODE
+        type: string
+
+      - name: taxschid
+        sql: TAXSCHID
+        type: string
+
+      - name: prstadcd
+        sql: PRSTADCD
+        type: string
+
+      - name: shiptoname
+        sql: ShipToName
+        type: string
+
+      - name: cntcprsn
+        sql: CNTCPRSN
+        type: string
+
+      - name: address1
+        sql: ADDRESS1
+        type: string
+
+      - name: address2
+        sql: ADDRESS2
+        type: string
+
+      - name: address3
+        sql: ADDRESS3
+        type: string
+
+      - name: city
+        sql: CITY
+        type: string
+
+      - name: state
+        sql: STATE
+        type: string
+
+      - name: zipcode
+        sql: ZIPCODE
+        type: string
+
+      - name: ccode
+        sql: CCode
+        type: string
+
+      - name: country
+        sql: COUNTRY
+        type: string
+
+      - name: phone1
+        sql: PHONE1
+        type: string
+
+      - name: phone2
+        sql: PHONE2
+        type: string
+
+      - name: phone3
+        sql: PHONE3
+        type: string
+
+      - name: faxnumbr
+        sql: FAXNUMBR
+        type: string
+
+      - name: contnbr
+        sql: CONTNBR
+        type: string
+
+      - name: contlnseqnbr
+        sql: CONTLNSEQNBR
+        type: string
+
+      - name: contitemnbr
+        sql: CONTITEMNBR
+        type: string
+
+      - name: contserialnbr
+        sql: CONTSERIALNBR
+        type: string
+
+      - name: reqshipdate
+        sql: ReqShipDate
+        type: time
+
+      - name: fufildat
+        sql: FUFILDAT
+        type: time
+
+      - name: actlship
+        sql: ACTLSHIP
+        type: time
+
+      - name: contstartdte
+        sql: CONTSTARTDTE
+        type: time
+
+      - name: contenddte
+        sql: CONTENDDTE
+        type: time
+
+      - name: dex_row_ts
+        sql: DEX_ROW_TS
+        type: time
+
+    measures:
+      - name: count
+        type: count
+
+      - name: decplqty
+        sql: DECPLQTY
+        type: sum
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

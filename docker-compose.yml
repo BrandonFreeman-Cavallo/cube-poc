@@ -1,0 +1,40 @@
+version: "3"
+
+networks:
+  cube-net:
+    external: false
+
+services:
+  sql-server:
+    container_name: sql-server
+    # image: mcr.microsoft.com/mssql/server:2022-latest
+    build:
+      context: ./mssql
+      dockerfile: Dockerfile
+    healthcheck:
+      test: ["CMD", "sqlcmd", "-q", "SELECT 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 15
+    networks:
+      - cube-net
+    ports:
+      - "1433:1433"
+    restart: on-failure:3
+
+  cube:
+    container_name: cube
+    image: cubejs/cube:latest
+    depends_on:
+      - sql-server
+    ports:
+      - 4000:4000
+      - 15432:15432
+    environment:
+      - CUBEJS_DEV_MODE=true
+    networks:
+      - cube-net
+    volumes:
+      - ./.env:/cube/conf/.env
+      - ./model:/cube/conf/model
+    restart: on-failure:3
