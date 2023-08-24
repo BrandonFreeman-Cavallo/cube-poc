@@ -1,0 +1,96 @@
+# ingress_latestdocument
+
+# DOCUMENT IDENTIFIERS ######################################################
+external_id                         "SOPTYPE|SOPNUMBE"
+external_number                     SOPNUMBE
+version                             [computed: date]
+master_number                       MSTRNUMB
+company                             [injected]
+# DOCUMENT CLASSIFICATION ####################################################
+document_type                       SOPTYPE
+# DOCUMENT HEADER ############################################################
+payment_terms_id	                PYMTRMID
+payment_terms		                PYMTRMID
+price_level_id		                PRCLEVEL
+price_level			                PRCLEVEL
+warehouse_id		                LOCNCODE
+warehouse			                LOCNCODE
+sales_territory_id	                SALSTERR
+sales_territory		                SALSTERR
+
+document_class                      [enum: SOPTYPE; QUOTE = 1, ORDER = 2, INVOICE = 3, RETURN = 4, BACK_ORDER = 5, FULFILLMENT_ORDER = 6]
+original_external_id                "ORIGTYPE|ORIGNUMB"
+orig_document_class                 [enum: ORIGTYPE; QUOTE = 1, ORDER = 2, INVOICE = 3, RETURN = 4, BACK_ORDER = 5, FULFILLMENT_ORDER = 6]
+orig_document_num                   ORIGNUMB
+# CUSTOMER ##################################################################
+customer_po_number	                CSTPONBR
+# FINANCIALS ################################################################
+subtotal                            SUBTOTAL				
+discount                            [computed: (TRDISPCT / 100) * subtotal | TRDISAMT]
+subtotal_net_discount               [computed: subtotal - discount]
+tax				                    TAXAMNT
+freight_taxable				        [enum: FRGTTXBL; TAXABLE = 1, NONTAXABLE = 2, BASE_ON_CUSTOMERS = 3
+freight				                FRTAMNT
+freight_tax_amount				    FRTTXAMT
+total				                DOCAMNT
+markdown_amount				        MRKDNAMT
+remaining_subtotal				    REMSUBTO
+misc_amount				            MISCAMNT
+tax_schedule_id				        TAXSCHID
+tax_schedule				        TAXSCHID
+is_sli_tax_based_on_invoice_total   BSIVCTTL
+taxable_tax_amount				    TXBTXAMT
+payment_amount_received		        PYMTRCVD
+deposit_amount_received		        DEPRECVD
+account_amount			            ACCTAMNT
+transaction_source		            TRXSORCE
+# DOCUMENT STATE ###########################################################
+current_queue_id                    [computed: BACHNUMB, DOCID]		
+is_posted                           [computed: now > GLPOSTDT]
+is_void                             [computed: VOIDSTTS = 1 | 2]			
+# TIME ####################################################################
+gl_posting_date			            GLPOSTDT
+quote_date				            QUOTEDAT
+quote_expiration_date	            QUOEXPDA
+order_date				            ORDRDATE
+invoice_date		                INVODATE
+back_order_date			            BACKDATE
+return_date				            RETUDATE
+requested_ship_date		            ReqShipDate
+fulfillment_date		            FUFILDAT
+discount_date			            DISCDATE
+due_date				            DUEDATE
+posted_date				            POSTEDDT
+tax_date				            Tax_Date
+sale_date				            SALEDATE
+created_at				            CREATDDT
+doc_date				            DOCDATE
+last_modified_at                    [computed: parent record ? ]
+last_processed_at                   [computed: now]
+# SHIPPING #############################################################
+shipping_method_id		            SHIPMTHD
+shipping_method			            SHIPMTHD
+shipping_city			            CITY
+shipping_state			            STATE
+shipping_zip			            ZIPCODE
+shipping_country		            COUNTRY
+shipping_country_code	            CCode
+freight_tax_schedule_id             FRTSCHID
+freight_tax_schedule	            FRTSCHID
+ups_zone				            UPSZONE
+is_ship_complete		            SHIPCOMPLETE
+
+# CalculateMarginUsingLineData
+extended_cost                       ExtendedCost
+margin_percent                      [computed: 100 * (subtotal_net_discount - extended_cost) / subtotal_net_discount) ]
+margin_dollars                      [computed: subtotal_net_discount - extended_cost ]
+
+sales_rep_id                        [derived: SLPRSNID]
+sales_rep_name                      [derived: SLPRSNID]
+sync_customer_id                    {
+                                        external_customer_id   CUSTNMBR
+                                        customer_number        CUSTNMBR
+                                        customer_name          CUSTNAME
+                                    }
+shipped_at                          ACTLSHIP
+historical_at                       "1900-01-01"

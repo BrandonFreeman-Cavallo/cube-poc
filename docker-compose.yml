@@ -36,5 +36,5 @@ services:
       - cube-net
     volumes:
       - ./.env:/cube/conf/.env
-      - ./model:/cube/conf/model
+      - ./model:/cube/conf/model:ro
     restart: on-failure:3
