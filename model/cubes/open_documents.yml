@@ -113,9 +113,11 @@ cubes:
       - sql: "{CUBE}.TRDISAMT > 0"
         label:
           sql: "{CUBE}.TRDISAMT"
+      else:
+        label: "0"
 
   - name: subtotal_net_discount
-    sql: "{CUBE}.SUBTOTAL - {discount}"
+    sql: "{CUBE}.SUBTOTAL - {CUBE.discount}"
     type: number
 
   - name: tax
@@ -334,23 +336,14 @@ cubes:
   #   sql: "CAST('1900-01-01' AS DATETIME )"
   #   type: time
 
-  # - name: extended_cost
-  #   sql: "{open_lines.sum_extended_cost}"
-  #   type: number
-
   measures:
-  # - name: extended_cost
-  #   sql: "SUM({open_lines.extended_cost})"
-  #   type: number
+  - name: margin_percent
+    sql: "100 * ({CUBE.subtotal_net_discount} - {open_lines.sum_extended_cost}) / {CUBE.subtotal_net_discount}"
+    type: number
 
-  # - name: margin_percent
-  #   sql: "100 * ({subtotal_net_discount} - {extended_cost}) / {subtotal_net_discount}"
-  #   type: number
-
-  # - name: margin_dollars
-  #   sql: "{subtotal_net_discount} - {extended_cost}"
-  #   type: number
-
+  - name: margin_dollars
+    sql: "{CUBE.subtotal_net_discount} - {open_lines.sum_extended_cost}"
+    type: number
 
   pre_aggregations:
   - name: main
