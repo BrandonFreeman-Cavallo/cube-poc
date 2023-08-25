@@ -1,12 +1,66 @@
 cubes:
-- name: open_lines
-  sql_table: dbo.SOP10200
+- name: all_lines
   data_source: default
+  sql: >
+    SELECT
+       ACTLSHIP
+      ,ATYALLOC
+      ,CMPNTSEQ
+      ,DROPSHIP
+      ,EXTDCOST
+      ,FUFILDAT
+      ,ITEMDESC
+      ,ITEMNMBR
+      ,LNITMSEQ
+      ,LOCNCODE
+      ,MRKDNAMT
+      ,MRKDNPCT
+      ,NONINVEN
+      ,PRCLEVEL
+      ,QTYBSUOM
+      ,QTYRTRND
+      ,QUANTITY
+      ,ReqShipDate
+      ,SOPNUMBE
+      ,SOPTYPE
+      ,TAXAMNT
+      ,TRDISAMT
+      ,UNITCOST
+      ,UNITPRCE
+      ,UOFM
+      ,XTNDPRCE
+      ,NULL AS historical_at
+    FROM dbo.SOP10200 UNION SELECT
+       ACTLSHIP
+      ,ATYALLOC
+      ,CMPNTSEQ
+      ,DROPSHIP
+      ,EXTDCOST
+      ,FUFILDAT
+      ,ITEMDESC
+      ,ITEMNMBR
+      ,LNITMSEQ
+      ,LOCNCODE
+      ,MRKDNAMT
+      ,MRKDNPCT
+      ,NONINVEN
+      ,PRCLEVEL
+      ,QTYBSUOM
+      ,QTYRTRND
+      ,QUANTITY
+      ,ReqShipDate
+      ,SOPNUMBE
+      ,SOPTYPE
+      ,TAXAMNT
+      ,TRDISAMT
+      ,UNITCOST
+      ,UNITPRCE
+      ,UOFM
+      ,XTNDPRCE
+      ,'1900-01-01' AS historical_at
+    FROM dbo.SOP30300
 
-  joins:
-  - name: open_documents
-    relationship: many_to_one
-    sql: "{open_documents}.SOPTYPE = {open_lines}.SOPTYPE AND {open_documents}.SOPNUMBE = {open_lines}.SOPNUMBE"
+  joins: []
 
   dimensions:
   #  - name: company
@@ -15,78 +69,54 @@ cubes:
 
   # IDENTIFIERS ##################################################################
 
-  - name: document_type
-    sql: "{CUBE}.SOPTYPE"
-    type: number
-    public: true
-    primary_key: true
-
-  - name: external_number
-    sql: "{CUBE}.SOPNUMBE"
-    type: string
-    public: true
-    primary_key: true
-
-  - name: item_sequence
-    sql: "{CUBE}.number"
-    type: string
-    public: true
-    primary_key: true
-
-  - name: component_sequence
-    sql: "{CUBE}.CMPNTSEQ"
-    type: number
-    public: true
-    primary_key: true
-
   - name: document_class
     type: string
     public: false
     case:
       when:
-      - sql: "{CUBE}.SOPTYPE = 1"
+      - sql: SOPTYPE = 1
         label: 'QUOTE'
-      - sql: "{CUBE}.SOPTYPE = 2"
+      - sql: SOPTYPE = 2
         label: 'ORDER'
-      - sql: "{CUBE}.SOPTYPE = 3"
+      - sql: SOPTYPE = 3
         label: 'INVOICE'
-      - sql: "{CUBE}.SOPTYPE = 4"
+      - sql: SOPTYPE = 4
         label: 'RETURN'
-      - sql: "{CUBE}.SOPTYPE = 5"
+      - sql: SOPTYPE = 5
         label: 'BACK_ORDER'
-      - sql: "{CUBE}.SOPTYPE = 6"
+      - sql: SOPTYPE = 6
         label: 'FULFILLMENT_ORDER'
       else:
         label: "UNKNOWN"
 
   - name: external_id
-    sql: "CONCAT({document_external_id}, '|', {CUBE}.LNITMSEQ, '|', COALESCE({CUBE}.CMPNTSEQ, 0))"
+    sql: "CONCAT({document_external_id}, '|', LNITMSEQ, '|', COALESCE(CMPNTSEQ, 0))"
     type: string
 
   - name: document_external_id
-    sql: "CONCAT(TRIM({document_class}), '|', TRIM({CUBE}.SOPNUMBE))"
+    sql: "CONCAT(TRIM({document_class}), '|', TRIM(SOPNUMBE))"
     type: string
 
   # - name: parent_line_external_id
-  #   sql: "{CUBE}.parent_line_ext_id"
+  #   sql: parent_line_ext_id
   #   type: string
 
   # ITEM ######################################################################
 
   - name: item_number
-    sql: "{CUBE}.ITEMNMBR"
+    sql: ITEMNMBR
     type: string
 
   - name: item_description
-    sql: "{CUBE}.ITEMDESC"
+    sql: ITEMDESC
     type: string
 
   - name: is_noninventory
-    sql: "{CUBE}.NONINVEN"
+    sql: NONINVEN
     type: boolean
 
   - name: is_dropship
-    sql: "{CUBE}.DROPSHIP"
+    sql: DROPSHIP
     type: boolean
 
   - name: package_udf_val # Effectively comes from a config (Sales_Line_Item_Package_Smart_Field).
@@ -99,7 +129,7 @@ cubes:
     type: string
     case:
       when:
-      - sql: "({package_udf_val} IS NOT NULL AND LEN({package_udf_val}) > 0) AND {CUBE}.ITEMNMBR IS NOT NULL AND {CUBE}.CMPNTSEQ IS NULL AND UPPER({CUBE}.ITEMNMBR) = UPPER({package_udf_val})"
+      - sql: "({package_udf_val} IS NOT NULL AND LEN({package_udf_val}) > 0) AND ITEMNMBR IS NOT NULL AND CMPNTSEQ IS NULL AND UPPER(ITEMNMBR) = UPPER({package_udf_val})"
         label: "true"
       else:
         label: "false"
@@ -108,13 +138,17 @@ cubes:
     type: string
     case:
       when:
-      - sql: "({package_udf_val} IS NOT NULL AND LEN({package_udf_val}) > 0) AND {CUBE}.ITEMNMBR IS NOT NULL AND {CUBE}.CMPNTSEQ IS NULL AND UPPER({CUBE}.ITEMNMBR) = UPPER({package_udf_val})"
+      - sql: "({package_udf_val} IS NOT NULL AND LEN({package_udf_val}) > 0) AND ITEMNMBR IS NOT NULL AND CMPNTSEQ IS NULL AND UPPER(ITEMNMBR) = UPPER({package_udf_val})"
         label: "false"
       else:
         label: "true"
 
   - name: uofm
-    sql: "{CUBE}.UOFM"
+    sql: UOFM
+    type: string
+
+  - name: base_uofm
+    sql: BASEUOFM
     type: string
 
   # FINANCIALS & QUANTITIES ##################################################################
@@ -133,7 +167,7 @@ cubes:
           sql: "{udf_cost}"
       else:
         label:
-          sql: "{CUBE}.UNITCOST"
+          sql: UNITCOST
 
   - name: extended_cost
     type: number
@@ -144,10 +178,10 @@ cubes:
           sql: "{unit_cost} * QUANTITY"
       else:
         label:
-          sql: "{CUBE}.EXTDCOST"
+          sql: EXTDCOST
 
   - name: base_quantity_factor
-    sql: "{CUBE}.QTYBSUOM"
+    sql: QTYBSUOM
     type: number
     public: false
 
@@ -158,7 +192,7 @@ cubes:
       when:
       - sql: "{base_quantity_factor} IS NOT NULL AND {base_quantity_factor} > 0"
         label:
-          sql: "{CUBE}.QUANTITY * {base_quantity_factor}"
+          sql: "QUANTITY * {base_quantity_factor}"
       else:
         label: "0"
 
@@ -173,11 +207,11 @@ cubes:
         label: "0"
 
   - name: unit_price
-    sql: "{CUBE}.UNITPRCE"
+    sql: UNITPRCE
     type: number
 
   - name: extended_price
-    sql: "{CUBE}.XTNDPRCE"
+    sql: XTNDPRCE
     type: number
 
   - name: base_unit_price
@@ -186,116 +220,72 @@ cubes:
       when:
       - sql: "{base_quantity} IS NOT NULL AND {base_quantity} > 0"
         label:
-          sql: "{CUBE}.XTNDPRCE / {base_quantity}"
+          sql: "XTNDPRCE / {base_quantity}"
       else:
         label: "0"
 
   - name: tax_amount
-    sql: "{CUBE}.TAXAMNT"
+    sql: TAXAMNT
     type: number
 
   - name: discount_amount
-    sql: "{CUBE}.TRDISAMT"
+    sql: TRDISAMT
     type: number
 
   - name: quantity
-    sql: "{CUBE}.QUANTITY"
+    sql: QUANTITY
     type: number
 
   - name: quantity_allocated
-    sql: "{CUBE}.ATYALLOC"
+    sql: ATYALLOC
     type: number
 
   - name: quantity_returned
-    sql: "{CUBE}.QTYRTRND"
+    sql: QTYRTRND
     type: number
 
   # OTHER ##################################################
 
   - name: price_level_id
-    sql: "{CUBE}.PRCLEVEL"
+    sql: PRCLEVEL
     type: string
 
   - name: warehouse_id
-    sql: "{CUBE}.LOCNCODE"
+    sql: LOCNCODE
     type: string
 
   - name: required_ship_date
-    sql: "{CUBE}.ReqShipDate"
+    sql: ReqShipDate
     type: time
 
 
   - name: fulfillment_date
-    sql: "{CUBE}.FUFILDAT"
+    sql: FUFILDAT
     type: time
 
 
   - name: actual_ship_date
-    sql: "{CUBE}.ACTLSHIP"
+    sql: ACTLSHIP
     type: time
 
 
   - name: markdown_amount
-    sql: "{CUBE}.MRKDNAMT"
+    sql: MRKDNAMT
     type: number
 
   - name: markdown_percent
     type: number
     case:
       when:
-      - sql: "{CUBE}.MRKDNPCT IS NOT NULL AND {CUBE}.MRKDNPCT > 0"
+      - sql: "MRKDNPCT IS NOT NULL AND MRKDNPCT > 0"
         label:
-          sql: "{CUBE}.MRKDNPCT / 100"
+          sql: "MRKDNPCT / 100"
       else:
         label: "0"
 
   measures:
-  - name: sum_extended_cost
-    sql: "{CUBE.extended_cost}"
-    type: sum
-    format: currency
 
   pre_aggregations:
-  - name: main
-    dimensions:
-    - open_lines.actual_ship_date
-    - open_lines.base_quantity
-    - open_lines.base_quantity_factor
-    - open_lines.base_unit_cost
-    - open_lines.base_unit_price
-    - open_lines.discount_amount
-    - open_lines.document_class
-    - open_lines.document_external_id
-    - open_lines.extended_cost
-    - open_lines.extended_price
-    - open_lines.external_id
-    - open_lines.fulfillment_date
-    - open_lines.is_component
-    - open_lines.is_dropship
-    - open_lines.is_noninventory
-    - open_lines.is_package
-    - open_lines.item_description
-    - open_lines.item_number
-    - open_lines.markdown_amount
-    - open_lines.markdown_percent
-    - open_lines.price_level_id
-    - open_lines.quantity
-    - open_lines.quantity_allocated
-    - open_lines.quantity_returned
-    - open_lines.required_ship_date
-    - open_lines.tax_amount
-    - open_lines.unit_cost
-    - open_lines.unit_price
-    - open_lines.uofm
-    - open_lines.warehouse_id
-
-  - name: sum_extended_cost_by_document
-    dimensions:
-    - CUBE.document_type
-    - CUBE.external_number
-    measures:
-    - CUBE.sum_extended_cost
-
 # Pre-aggregation definitions go here.
 # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
 
