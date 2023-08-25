@@ -1,0 +1,8 @@
+views:
+- name: warehouse
+
+  cubes:
+  - join_path: open_documents
+    includes:
+    - warehouse_id
+    - created_at

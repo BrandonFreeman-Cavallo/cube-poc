@@ -6,7 +6,11 @@ cubes:
   joins:
   - name: open_lines
     relationship: one_to_many
-    sql: "{open_documents}.SOPTYPE = {open_lines}.SOPTYPE AND {open_documents}.SOPNUMBE = {open_lines}.SOPNUMBE"
+    sql: "{CUBE}.SOPTYPE = {open_lines}.SOPTYPE AND {CUBE}.SOPNUMBE = {open_lines}.SOPNUMBE"
+
+  - name: sales_reps
+    relationship: one_to_one
+    sql: "{open_documents.sales_rep_id} = {sales_reps.sales_rep_id}"
 
   dimensions:
   - name: document_type
@@ -316,10 +320,6 @@ cubes:
     sql: "{CUBE}.SLPRSNID"
     type: string
 
-  - name: sales_rep_name
-    sql: "{CUBE}.SLPRSNID"
-    type: string
-
   - name: customer_number
     sql: "{CUBE}.CUSTNMBR"
     type: string
@@ -360,7 +360,6 @@ cubes:
     - open_documents.document_class
     - open_documents.document_type
     - open_documents.due_date
-    # - open_documents.extended_cost
     - open_documents.external_id
     - open_documents.external_number
     - open_documents.freight
@@ -391,7 +390,6 @@ cubes:
     - open_documents.return_date
     - open_documents.sale_date
     - open_documents.sales_rep_id
-    - open_documents.sales_rep_name
     - open_documents.sales_territory_id
     - open_documents.shipped_at
     - open_documents.shipping_city
