@@ -1,0 +1,12 @@
+views:
+- name: extended_field_metadata
+
+  cubes:
+  - join_path: open_documents
+    includes:
+    - sales_rep_id
+
+  - join_path: sales_reps
+    includes:
+    - first_name
+    - last_name

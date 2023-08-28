@@ -1,0 +1,119 @@
+cubes:
+- name: SOP_Transfers_Child
+  sql: "SELECT ORIGTYPE, ORIGNUMB, MSTRNUMB, SOPTYPE, SOPNUMBE, DOCDATE, VOIDSTTS, SOURCE = 'SOP10100'\nFROM SOP10100 doc WITH (NOLOCK) WHERE NOT EXISTS\n  (SELECT 1\n    FROM SOP30200 WITH (NOLOCK)\n    WHERE SOPTYPE = doc.SOPTYPE\n      AND SOPNUMBE = doc.SOPNUMBE )\nUNION  SELECT ORIGTYPE, ORIGNUMB, MSTRNUMB, SOPTYPE, SOPNUMBE, DOCDATE, VOIDSTTS, SOURCE = 'SOP30200'\nFROM SOP30200 docHist WITH (NOLOCK)"
+  data_source: default
+  public: false
+
+  joins:
+  - name: SOP_Transfers
+    relationship: many_to_one
+    sql: "{SOP_Transfers}.SOPTYPE = {CUBE}.ORIGTYPE AND {SOP_Transfers}.SOPNUMBE = {CUBE}.ORIGNUMB"
+
+  measures:
+  - name: MAX_SOPTYPE
+    sql: "MAX({CUBE.SOPTYPE})"
+    type: number
+
+  - name: MIN_DOCDATE
+    sql: "MIN({CUBE.DOCDATE})"
+    type: time
+
+  - name: MAX_SOPNUMBE
+    sql: "MAX({CUBE.SOPNUMBE})"
+    type: string
+
+  - name: MIN_SOPNUMBE
+    sql: "MIN({CUBE.SOPNUMBE})"
+    type: string
+
+  - name: MIN_SOPTYPE
+    sql: "MIN({CUBE.SOPTYPE})"
+    type: number
+
+  dimensions:
+  - name: MSTRNUMB
+    sql: "{CUBE}.MSTRNUMB"
+    type: number
+
+  - name: SOPTYPE
+    sql: "{CUBE}.SOPTYPE"
+    type: number
+    public: true
+    primary_key: true
+
+  - name: SOPNUMBE
+    sql: "{CUBE}.SOPNUMBE"
+    type: string
+    public: true
+    primary_key: true
+
+  - name: DOCDATE
+    sql: "{CUBE}.DOCDATE"
+    type: time
+
+  - name: VOIDSTTS
+    sql: "{CUBE}.VOIDSTTS"
+    type: number
+
+- name: SOP_Transfers
+  sql: "SELECT MSTRNUMB, SOPTYPE, SOPNUMBE, DOCDATE, VOIDSTTS, SOURCE = 'SOP10100'\nFROM SOP10100 doc WITH (NOLOCK) WHERE NOT EXISTS\n  (SELECT 1\n    FROM SOP30200 WITH (NOLOCK)\n    WHERE SOPTYPE = doc.SOPTYPE\n      AND SOPNUMBE = doc.SOPNUMBE )\nUNION  SELECT \n  MSTRNUMB, SOPTYPE, SOPNUMBE, DOCDATE, VOIDSTTS, SOURCE = 'SOP30200'\nFROM SOP30200 docHist WITH (NOLOCK)"
+  data_source: default
+
+  joins:
+  - name: SOPJOIN
+    relationship: one_to_many
+    sql: "{CUBE.SOPTYPE} = {SOP_Transfers_Child.ORIGTYPE} AND {CUBE.SOPNUMBE} = {SOP_Transfers_Child.ORIGNUMB}"
+
+  dimensions:
+  - name: MSTRNUMB
+    sql: "{CUBE}.MSTRNUMB"
+    type: number
+
+  - name: SOPTYPE
+    sql: "{CUBE}.SOPTYPE"
+    type: number
+    public: true
+    primary_key: true
+
+  - name: SOPNUMBE
+    sql: "{CUBE}.SOPNUMBE"
+    type: string
+    public: true
+    primary_key: true
+
+  - name: DOCDATE
+    sql: "{CUBE}.DOCDATE"
+    type: time
+
+  - name: VOIDSTTS
+    sql: "{CUBE}.VOIDSTTS"
+    type: number
+
+  measures:
+  - name: transferred
+    sql: "CASE WHEN {SOP_Transfers_Child.MAX_SOPTYPE} > {CUBE.SOPTYPE} THEN 'true' ELSE 'false' END"
+    type: boolean
+
+  - name: transfer_date
+    sql: "CASE WHEN {SOP_Transfers_Child.MAX_SOPTYPE} > {CUBE.SOPTYPE} THEN {SOP_Transfers_Child.MIN_DOCDATE} ELSE NULL END"
+    type: time
+
+  - name: transfer_doc_num
+    sql: "CASE WHEN {SOP_Transfers_Child.MAX_SOPTYPE} > {CUBE.SOPTYPE} THEN {SOP_Transfers_Child.MIN_SOPNUMBE} ELSE NULL END"
+    type: string
+
+  - name: transfer_doc_type
+    sql: "CASE WHEN {SOP_Transfers_Child.MAX_SOPTYPE} > {CUBE.SOPTYPE} THEN {SOP_Transfers_Child.MIN_SOPTYPE} ELSE NULL END"
+    type: number
+
+  - name: partial_invoice
+    sql: "CASE WHEN {SOP_Transfers_Child.MIN_SOPTYPE} = {CUBE.SOPTYPE} AND {SOP_Transfers_Child.MAX_SOPTYPE} > {CUBE.SOPTYPE} THEN 'true' ELSE 'false' END"
+    type: boolean
+
+  - name: split
+    sql: "CASE WHEN {SOP_Transfers_Child.MAX_SOPTYPE} = {CUBE.SOPTYPE} THEN 'true' ELSE 'false' END"
+    type: boolean
+
+  - name: true_void
+    sql: "CASE WHEN {CUBE.SOPTYPE} = 1 AND COALESCE({SOP_Transfers_Child.MAX_SOPNUMBE}, '') = '' THEN 'true' ELSE 'false' END"
+    type: boolean
