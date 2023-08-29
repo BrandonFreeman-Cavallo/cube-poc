@@ -1,0 +1,753 @@
+cubes:
+- name: SOPJOIN
+  sql: "SELECT \n  SOPTYPE,\n  SOPNUMBE,\n  ORIGTYPE,\n  ORIGNUMB,\n  DOCID,\n  DOCDATE,\n  GLPOSTDT,\n  QUOTEDAT,\n  QUOEXPDA,\n  ORDRDATE,\n  INVODATE,\n  BACKDATE,\n  RETUDATE,\n  ReqShipDate,\n  FUFILDAT,\n  ACTLSHIP,\n  DISCDATE,\n  DUEDATE,\n  REPTING,\n  TRXFREQU,\n  TIMEREPD,\n  TIMETREP,\n  DYSTINCR,\n  DTLSTREP,\n  DSTBTCH1,\n  DSTBTCH2,\n  USDOCID1,\n  USDOCID2,\n  DISCFRGT,\n  ORDAVFRT,\n  DISCMISC,\n  ORDAVMSC,\n  DISAVAMT,\n  ORDAVAMT,\n  DISCRTND,\n  ORDISRTD,\n  DISTKNAM,\n  ORDISTKN,\n  DSCPCTAM,\n  DSCDLRAM,\n  ORDDLRAT,\n  DISAVTKN,\n  ORDATKN,\n  PYMTRMID,\n  PRCLEVEL,\n  LOCNCODE,\n  BCHSOURC,\n  BACHNUMB,\n  CUSTNMBR,\n  CUSTNAME,\n  CSTPONBR,\n  PROSPECT,\n  MSTRNUMB,\n  PCKSLPNO,\n  PICTICNU,\n  MRKDNAMT,\n  ORMRKDAM,\n  PRBTADCD,\n  PRSTADCD,\n  CNTCPRSN,\n  ShipToName,\n  ADDRESS1,\n  ADDRESS2,\n  ADDRESS3,\n  CITY,\n  STATE,\n  ZIPCODE,\n  CCode,\n  COUNTRY,\n  PHNUMBR1,\n  PHNUMBR2,\n  PHONE3,\n  FAXNUMBR,\n  COMAPPTO,\n  COMMAMNT,\n  OCOMMAMT,\n  CMMSLAMT,\n  ORCOSAMT,\n  NCOMAMNT,\n  ORNCMAMT,\n  SHIPMTHD,\n  TRDISAMT,\n  ORTDISAM,\n  TRDISPCT,\n  SUBTOTAL,\n  ORSUBTOT,\n  REMSUBTO,\n  OREMSUBT,\n  EXTDCOST,\n  OREXTCST,\n  FRTAMNT,\n  ORFRTAMT,\n  MISCAMNT,\n  ORMISCAMT,\n  TXENGCLD,\n  TAXEXMT1,\n  TAXEXMT2,\n  TXRGNNUM,\n  TAXSCHID,\n  TXSCHSRC,\n  BSIVCTTL,\n  FRTSCHID,\n  FRTTXAMT,\n  ORFRTTAX,\n  FRGTTXBL,\n  MSCSCHID,\n  MSCTXAMT,\n  ORMSCTAX,\n  MISCTXBL,\n  BKTFRTAM,\n  ORBKTFRT,\n  BKTMSCAM,\n  ORBKTMSC,\n  BCKTXAMT,\n  OBTAXAMT,\n  TXBTXAMT,\n  OTAXTAMT,\n  TAXAMNT,\n  ORTAXAMT,\n  ECTRX,\n  DOCAMNT,\n  ORDOCAMT,\n  PYMTRCVD,\n  ORPMTRVD,\n  DEPRECVD,\n  ORDEPRVD,\n  CODAMNT,\n  ORCODAMT,\n  ACCTAMNT,\n  ORACTAMT,\n  SALSTERR,\n  SLPRSNID,\n  UPSZONE,\n  TIMESPRT,\n  PSTGSTUS,\n  VOIDSTTS,\n  ALLOCABY,\n  NOTEINDX,\n  CURNCYID,\n  CURRNIDX,\n  RATETPID,\n  EXGTBLID,\n  XCHGRATE,\n  DENXRATE,\n  EXCHDATE,\n  TIME1,\n  RTCLCMTD,\n  MCTRXSTT,\n  TRXSORCE,\n  SOPHDRE1,\n  SOPHDRE2,\n  SOPLNERR,\n  SOPHDRFL,\n  COMMNTID,\n  REFRENCE,\n  POSTEDDT,\n  PTDUSRID,\n  USER2ENT,\n  CREATDDT,\n  MODIFDT,\n  Tax_Date,\n  APLYWITH,\n  WITHHAMT,\n  SHPPGDOC,\n  CORRCTN,\n  SIMPLIFD,\n  DOCNCORR,\n  SEQNCORR,\n  SALEDATE,\n  EXCEPTIONALDEMAND,\n  Flags,\n  SOPSTATUS,\n  SHIPCOMPLETE,\n  DIRECTDEBIT,\n  WorkflowApprStatCreditLm,\n  WorkflowPriorityCreditLm,\n  WorkflowApprStatusQuote,\n  WorkflowPriorityQuote,\n  Workflow_Status,\n  ContractExchangeRateStat,\n  Print_Phone_NumberGB,\n  DEX_ROW_TS,\n  DEX_ROW_ID ,\n  SOURCE = 'SOP10100'\nFROM SOP10100 doc WITH (NOLOCK)\nWHERE NOT EXISTS\n   (SELECT 1\n    FROM SOP30200 WITH (NOLOCK)\n    WHERE SOPTYPE = doc.SOPTYPE\n      AND SOPNUMBE = doc.SOPNUMBE )\nUNION \nSELECT \n  SOPTYPE,\n  SOPNUMBE,\n  ORIGTYPE,\n  ORIGNUMB,\n  DOCID,\n  DOCDATE,\n  GLPOSTDT,\n  QUOTEDAT,\n  QUOEXPDA,\n  ORDRDATE,\n  INVODATE,\n  BACKDATE,\n  RETUDATE,\n  ReqShipDate,\n  FUFILDAT,\n  ACTLSHIP,\n  DISCDATE,\n  DUEDATE,\n  REPTING,\n  TRXFREQU,\n  TIMEREPD,\n  TIMETREP,\n  DYSTINCR,\n  DTLSTREP,\n  DSTBTCH1,\n  DSTBTCH2,\n  USDOCID1,\n  USDOCID2,\n  DISCFRGT,\n  ORDAVFRT,\n  DISCMISC,\n  ORDAVMSC,\n  DISAVAMT,\n  ORDAVAMT,\n  DISCRTND,\n  ORDISRTD,\n  DISTKNAM,\n  ORDISTKN,\n  DSCPCTAM,\n  DSCDLRAM,\n  ORDDLRAT,\n  DISAVTKN,\n  ORDATKN,\n  PYMTRMID,\n  PRCLEVEL,\n  LOCNCODE,\n  BCHSOURC,\n  BACHNUMB,\n  CUSTNMBR,\n  CUSTNAME,\n  CSTPONBR,\n  PROSPECT,\n  MSTRNUMB,\n  PCKSLPNO,\n  PICTICNU,\n  MRKDNAMT,\n  ORMRKDAM,\n  PRBTADCD,\n  PRSTADCD,\n  CNTCPRSN,\n  ShipToName,\n  ADDRESS1,\n  ADDRESS2,\n  ADDRESS3,\n  CITY,\n  STATE,\n  ZIPCODE,\n  CCode,\n  COUNTRY,\n  PHNUMBR1,\n  PHNUMBR2,\n  PHONE3,\n  FAXNUMBR,\n  COMAPPTO,\n  COMMAMNT,\n  OCOMMAMT,\n  CMMSLAMT,\n  ORCOSAMT,\n  NCOMAMNT,\n  ORNCMAMT,\n  SHIPMTHD,\n  TRDISAMT,\n  ORTDISAM,\n  TRDISPCT,\n  SUBTOTAL,\n  ORSUBTOT,\n  REMSUBTO,\n  OREMSUBT,\n  EXTDCOST,\n  OREXTCST,\n  FRTAMNT,\n  ORFRTAMT,\n  MISCAMNT,\n  ORMISCAMT,\n  TXENGCLD,\n  TAXEXMT1,\n  TAXEXMT2,\n  TXRGNNUM,\n  TAXSCHID,\n  TXSCHSRC,\n  BSIVCTTL,\n  FRTSCHID,\n  FRTTXAMT,\n  ORFRTTAX,\n  FRGTTXBL,\n  MSCSCHID,\n  MSCTXAMT,\n  ORMSCTAX,\n  MISCTXBL,\n  BKTFRTAM,\n  ORBKTFRT,\n  BKTMSCAM,\n  ORBKTMSC,\n  BCKTXAMT,\n  OBTAXAMT,\n  TXBTXAMT,\n  OTAXTAMT,\n  TAXAMNT,\n  ORTAXAMT,\n  ECTRX,\n  DOCAMNT,\n  ORDOCAMT,\n  PYMTRCVD,\n  ORPMTRVD,\n  DEPRECVD,\n  ORDEPRVD,\n  CODAMNT,\n  ORCODAMT,\n  ACCTAMNT,\n  ORACTAMT,\n  SALSTERR,\n  SLPRSNID,\n  UPSZONE,\n  TIMESPRT,\n  PSTGSTUS,\n  VOIDSTTS,\n  ALLOCABY,\n  NOTEINDX,\n  CURNCYID,\n  CURRNIDX,\n  RATETPID,\n  EXGTBLID,\n  XCHGRATE,\n  DENXRATE,\n  EXCHDATE,\n  TIME1,\n  RTCLCMTD,\n  MCTRXSTT,\n  TRXSORCE,\n  SOPHDRE1,\n  SOPHDRE2,\n  SOPLNERR,\n  SOPHDRFL,\n  COMMNTID,\n  REFRENCE,\n  POSTEDDT,\n  PTDUSRID,\n  USER2ENT,\n  CREATDDT,\n  MODIFDT,\n  Tax_Date,\n  APLYWITH,\n  WITHHAMT,\n  SHPPGDOC,\n  CORRCTN,\n  SIMPLIFD,\n  DOCNCORR,\n  SEQNCORR,\n  SALEDATE,\n  EXCEPTIONALDEMAND,\n  Flags,\n  SOPSTATUS,\n  SHIPCOMPLETE,\n  DIRECTDEBIT,\n  WorkflowApprStatCreditLm,\n  WorkflowPriorityCreditLm,\n  WorkflowApprStatusQuote,\n  WorkflowPriorityQuote,\n  Workflow_Status,\n  ContractExchangeRateStat,\n  Print_Phone_NumberGB,\n  DEX_ROW_TS,\n  DEX_ROW_ID ,\n  SOURCE = 'SOP30200'\nFROM SOP30200 docHist WITH (NOLOCK)\n"
+  data_source: default
+
+  dimensions:
+  - name: SOPTYPE
+    sql: "{CUBE}.SOPTYPE"
+    type: number
+    public: true
+    primary_key: true
+
+  - name: SOPNUMBE
+    sql: "{CUBE}.SOPNUMBE"
+    type: string
+    public: true
+    primary_key: true
+
+  - name: ORIGTYPE
+    sql: "{CUBE}.ORIGTYPE"
+    type: number
+
+  - name: ORIGNUMB
+    sql: "{CUBE}.ORIGNUMB"
+    type: string
+
+  - name: SOURCE
+    sql: "{CUBE}.SOURCE"
+    type: string
+
+  - name: DOCID
+    sql: "{CUBE}.DOCID"
+    type: string
+
+  - name: DOCDATE
+    sql: "{CUBE}.DOCDATE"
+    type: time
+
+  - name: VOIDSTTS
+    sql: "{CUBE}.VOIDSTTS"
+    type: number
+
+  - name: GLPOSTDT
+    sql: "{CUBE}.GLPOSTDT"
+    type: time
+
+  - name: PSTGSTUS
+    sql: "{CUBE}.PSTGSTUS"
+    type: number
+
+  # - name: GLPOSTDT
+  #   sql: "{CUBE}.GLPOSTDT"
+  #   type: time
+
+  # - name: QUOTEDAT
+  #   sql: "{CUBE}.QUOTEDAT"
+  #   type: time
+
+  # - name: QUOEXPDA
+  #   sql: "{CUBE}.QUOEXPDA"
+  #   type: time
+
+  # - name: ORDRDATE
+  #   sql: "{CUBE}.ORDRDATE"
+  #   type: time
+
+  # - name: INVODATE
+  #   sql: "{CUBE}.INVODATE"
+  #   type: time
+
+  # - name: BACKDATE
+  #   sql: "{CUBE}.BACKDATE"
+  #   type: time
+
+  # - name: RETUDATE
+  #   sql: "{CUBE}.RETUDATE"
+  #   type: time
+
+  # - name: ReqShipDate
+  #   sql: "{CUBE}.ReqShipDate"
+  #   type: time
+
+  # - name: FUFILDAT
+  #   sql: "{CUBE}.FUFILDAT"
+  #   type: time
+
+  # - name: ACTLSHIP
+  #   sql: "{CUBE}.ACTLSHIP"
+  #   type: time
+
+  # - name: DISCDATE
+  #   sql: "{CUBE}.DISCDATE"
+  #   type: time
+
+  # - name: DUEDATE
+  #   sql: "{CUBE}.DUEDATE"
+  #   type: time
+
+  # - name: REPTING
+  #   sql: "{CUBE}.REPTING"
+  #   type: number
+
+  # - name: TRXFREQU
+  #   sql: "{CUBE}.TRXFREQU"
+  #   type: number
+
+  # - name: TIMEREPD
+  #   sql: "{CUBE}.TIMEREPD"
+  #   type: number
+
+  # - name: TIMETREP
+  #   sql: "{CUBE}.TIMETREP"
+  #   type: number
+
+  # - name: DYSTINCR
+  #   sql: "{CUBE}.DYSTINCR"
+  #   type: number
+
+  # - name: DTLSTREP
+  #   sql: "{CUBE}.DTLSTREP"
+  #   type: time
+
+  # - name: DSTBTCH1
+  #   sql: "{CUBE}.DSTBTCH1"
+  #   type: string
+
+  # - name: DSTBTCH2
+  #   sql: "{CUBE}.DSTBTCH2"
+  #   type: string
+
+  # - name: USDOCID1
+  #   sql: "{CUBE}.USDOCID1"
+  #   type: string
+
+  # - name: USDOCID2
+  #   sql: "{CUBE}.USDOCID2"
+  #   type: string
+
+  # - name: DISCFRGT
+  #   sql: "{CUBE}.DISCFRGT"
+  #   type: number
+
+  # - name: ORDAVFRT
+  #   sql: "{CUBE}.ORDAVFRT"
+  #   type: number
+
+  # - name: DISCMISC
+  #   sql: "{CUBE}.DISCMISC"
+  #   type: number
+
+  # - name: ORDAVMSC
+  #   sql: "{CUBE}.ORDAVMSC"
+  #   type: number
+
+  # - name: DISAVAMT
+  #   sql: "{CUBE}.DISAVAMT"
+  #   type: number
+
+  # - name: ORDAVAMT
+  #   sql: "{CUBE}.ORDAVAMT"
+  #   type: number
+
+  # - name: DISCRTND
+  #   sql: "{CUBE}.DISCRTND"
+  #   type: number
+
+  # - name: ORDISRTD
+  #   sql: "{CUBE}.ORDISRTD"
+  #   type: number
+
+  # - name: DISTKNAM
+  #   sql: "{CUBE}.DISTKNAM"
+  #   type: number
+
+  # - name: ORDISTKN
+  #   sql: "{CUBE}.ORDISTKN"
+  #   type: number
+
+  # - name: DSCPCTAM
+  #   sql: "{CUBE}.DSCPCTAM"
+  #   type: number
+
+  # - name: DSCDLRAM
+  #   sql: "{CUBE}.DSCDLRAM"
+  #   type: number
+
+  # - name: ORDDLRAT
+  #   sql: "{CUBE}.ORDDLRAT"
+  #   type: number
+
+  # - name: DISAVTKN
+  #   sql: "{CUBE}.DISAVTKN"
+  #   type: number
+
+  # - name: ORDATKN
+  #   sql: "{CUBE}.ORDATKN"
+  #   type: number
+
+  # - name: PYMTRMID
+  #   sql: "{CUBE}.PYMTRMID"
+  #   type: string
+
+  # - name: PRCLEVEL
+  #   sql: "{CUBE}.PRCLEVEL"
+  #   type: string
+
+  # - name: LOCNCODE
+  #   sql: "{CUBE}.LOCNCODE"
+  #   type: string
+
+  # - name: BCHSOURC
+  #   sql: "{CUBE}.BCHSOURC"
+  #   type: string
+
+  # - name: BACHNUMB
+  #   sql: "{CUBE}.BACHNUMB"
+  #   type: string
+
+  # - name: CUSTNMBR
+  #   sql: "{CUBE}.CUSTNMBR"
+  #   type: string
+
+  # - name: CUSTNAME
+  #   sql: "{CUBE}.CUSTNAME"
+  #   type: string
+
+  # - name: CSTPONBR
+  #   sql: "{CUBE}.CSTPONBR"
+  #   type: string
+
+  # - name: PROSPECT
+  #   sql: "{CUBE}.PROSPECT"
+  #   type: number
+
+  # - name: MSTRNUMB
+  #   sql: "{CUBE}.MSTRNUMB"
+  #   type: number
+
+  # - name: PCKSLPNO
+  #   sql: "{CUBE}.PCKSLPNO"
+  #   type: string
+
+  # - name: PICTICNU
+  #   sql: "{CUBE}.PICTICNU"
+  #   type: string
+
+  # - name: MRKDNAMT
+  #   sql: "{CUBE}.MRKDNAMT"
+  #   type: number
+
+  # - name: ORMRKDAM
+  #   sql: "{CUBE}.ORMRKDAM"
+  #   type: number
+
+  # - name: PRBTADCD
+  #   sql: "{CUBE}.PRBTADCD"
+  #   type: string
+
+  # - name: PRSTADCD
+  #   sql: "{CUBE}.PRSTADCD"
+  #   type: string
+
+  # - name: CNTCPRSN
+  #   sql: "{CUBE}.CNTCPRSN"
+  #   type: string
+
+  # - name: ShipToName
+  #   sql: "{CUBE}.ShipToName"
+  #   type: string
+
+  # - name: ADDRESS1
+  #   sql: "{CUBE}.ADDRESS1"
+  #   type: string
+
+  # - name: ADDRESS2
+  #   sql: "{CUBE}.ADDRESS2"
+  #   type: string
+
+  # - name: ADDRESS3
+  #   sql: "{CUBE}.ADDRESS3"
+  #   type: string
+
+  # - name: CITY
+  #   sql: "{CUBE}.CITY"
+  #   type: string
+
+  # - name: STATE
+  #   sql: "{CUBE}.STATE"
+  #   type: string
+
+  # - name: ZIPCODE
+  #   sql: "{CUBE}.ZIPCODE"
+  #   type: string
+
+  # - name: CCode
+  #   sql: "{CUBE}.CCode"
+  #   type: string
+
+  # - name: COUNTRY
+  #   sql: "{CUBE}.COUNTRY"
+  #   type: string
+
+  # - name: PHNUMBR1
+  #   sql: "{CUBE}.PHNUMBR1"
+  #   type: string
+
+  # - name: PHNUMBR2
+  #   sql: "{CUBE}.PHNUMBR2"
+  #   type: string
+
+  # - name: PHONE3
+  #   sql: "{CUBE}.PHONE3"
+  #   type: string
+
+  # - name: FAXNUMBR
+  #   sql: "{CUBE}.FAXNUMBR"
+  #   type: string
+
+  # - name: COMAPPTO
+  #   sql: "{CUBE}.COMAPPTO"
+  #   type: number
+
+  # - name: COMMAMNT
+  #   sql: "{CUBE}.COMMAMNT"
+  #   type: number
+
+  # - name: OCOMMAMT
+  #   sql: "{CUBE}.OCOMMAMT"
+  #   type: number
+
+  # - name: CMMSLAMT
+  #   sql: "{CUBE}.CMMSLAMT"
+  #   type: number
+
+  # - name: ORCOSAMT
+  #   sql: "{CUBE}.ORCOSAMT"
+  #   type: number
+
+  # - name: NCOMAMNT
+  #   sql: "{CUBE}.NCOMAMNT"
+  #   type: number
+
+  # - name: ORNCMAMT
+  #   sql: "{CUBE}.ORNCMAMT"
+  #   type: number
+
+  # - name: SHIPMTHD
+  #   sql: "{CUBE}.SHIPMTHD"
+  #   type: string
+
+  # - name: TRDISAMT
+  #   sql: "{CUBE}.TRDISAMT"
+  #   type: number
+
+  # - name: ORTDISAM
+  #   sql: "{CUBE}.ORTDISAM"
+  #   type: number
+
+  # - name: TRDISPCT
+  #   sql: "{CUBE}.TRDISPCT"
+  #   type: number
+
+  # - name: SUBTOTAL
+  #   sql: "{CUBE}.SUBTOTAL"
+  #   type: number
+
+  # - name: ORSUBTOT
+  #   sql: "{CUBE}.ORSUBTOT"
+  #   type: number
+
+  # - name: REMSUBTO
+  #   sql: "{CUBE}.REMSUBTO"
+  #   type: number
+
+  # - name: OREMSUBT
+  #   sql: "{CUBE}.OREMSUBT"
+  #   type: number
+
+  # - name: EXTDCOST
+  #   sql: "{CUBE}.EXTDCOST"
+  #   type: number
+
+  # - name: OREXTCST
+  #   sql: "{CUBE}.OREXTCST"
+  #   type: number
+
+  # - name: FRTAMNT
+  #   sql: "{CUBE}.FRTAMNT"
+  #   type: number
+
+  # - name: ORFRTAMT
+  #   sql: "{CUBE}.ORFRTAMT"
+  #   type: number
+
+  # - name: MISCAMNT
+  #   sql: "{CUBE}.MISCAMNT"
+  #   type: number
+
+  # - name: ORMISCAMT
+  #   sql: "{CUBE}.ORMISCAMT"
+  #   type: number
+
+  # - name: TXENGCLD
+  #   sql: "{CUBE}.TXENGCLD"
+  #   type: number
+
+  # - name: TAXEXMT1
+  #   sql: "{CUBE}.TAXEXMT1"
+  #   type: string
+
+  # - name: TAXEXMT2
+  #   sql: "{CUBE}.TAXEXMT2"
+  #   type: string
+
+  # - name: TXRGNNUM
+  #   sql: "{CUBE}.TXRGNNUM"
+  #   type: string
+
+  # - name: TAXSCHID
+  #   sql: "{CUBE}.TAXSCHID"
+  #   type: string
+
+  # - name: TXSCHSRC
+  #   sql: "{CUBE}.TXSCHSRC"
+  #   type: number
+
+  # - name: BSIVCTTL
+  #   sql: "{CUBE}.BSIVCTTL"
+  #   type: number
+
+  # - name: FRTSCHID
+  #   sql: "{CUBE}.FRTSCHID"
+  #   type: string
+
+  # - name: FRTTXAMT
+  #   sql: "{CUBE}.FRTTXAMT"
+  #   type: number
+
+  # - name: ORFRTTAX
+  #   sql: "{CUBE}.ORFRTTAX"
+  #   type: number
+
+  # - name: FRGTTXBL
+  #   sql: "{CUBE}.FRGTTXBL"
+  #   type: number
+
+  # - name: MSCSCHID
+  #   sql: "{CUBE}.MSCSCHID"
+  #   type: string
+
+  # - name: MSCTXAMT
+  #   sql: "{CUBE}.MSCTXAMT"
+  #   type: number
+
+  # - name: ORMSCTAX
+  #   sql: "{CUBE}.ORMSCTAX"
+  #   type: number
+
+  # - name: MISCTXBL
+  #   sql: "{CUBE}.MISCTXBL"
+  #   type: number
+
+  # - name: BKTFRTAM
+  #   sql: "{CUBE}.BKTFRTAM"
+  #   type: number
+
+  # - name: ORBKTFRT
+  #   sql: "{CUBE}.ORBKTFRT"
+  #   type: number
+
+  # - name: BKTMSCAM
+  #   sql: "{CUBE}.BKTMSCAM"
+  #   type: number
+
+  # - name: ORBKTMSC
+  #   sql: "{CUBE}.ORBKTMSC"
+  #   type: number
+
+  # - name: BCKTXAMT
+  #   sql: "{CUBE}.BCKTXAMT"
+  #   type: number
+
+  # - name: OBTAXAMT
+  #   sql: "{CUBE}.OBTAXAMT"
+  #   type: number
+
+  # - name: TXBTXAMT
+  #   sql: "{CUBE}.TXBTXAMT"
+  #   type: number
+
+  # - name: OTAXTAMT
+  #   sql: "{CUBE}.OTAXTAMT"
+  #   type: number
+
+  # - name: TAXAMNT
+  #   sql: "{CUBE}.TAXAMNT"
+  #   type: number
+
+  # - name: ORTAXAMT
+  #   sql: "{CUBE}.ORTAXAMT"
+  #   type: number
+
+  # - name: ECTRX
+  #   sql: "{CUBE}.ECTRX"
+  #   type: number
+
+  # - name: DOCAMNT
+  #   sql: "{CUBE}.DOCAMNT"
+  #   type: number
+
+  # - name: ORDOCAMT
+  #   sql: "{CUBE}.ORDOCAMT"
+  #   type: number
+
+  # - name: PYMTRCVD
+  #   sql: "{CUBE}.PYMTRCVD"
+  #   type: number
+
+  # - name: ORPMTRVD
+  #   sql: "{CUBE}.ORPMTRVD"
+  #   type: number
+
+  # - name: DEPRECVD
+  #   sql: "{CUBE}.DEPRECVD"
+  #   type: number
+
+  # - name: ORDEPRVD
+  #   sql: "{CUBE}.ORDEPRVD"
+  #   type: number
+
+  # - name: CODAMNT
+  #   sql: "{CUBE}.CODAMNT"
+  #   type: number
+
+  # - name: ORCODAMT
+  #   sql: "{CUBE}.ORCODAMT"
+  #   type: number
+
+  # - name: ACCTAMNT
+  #   sql: "{CUBE}.ACCTAMNT"
+  #   type: number
+
+  # - name: ORACTAMT
+  #   sql: "{CUBE}.ORACTAMT"
+  #   type: number
+
+  # - name: SALSTERR
+  #   sql: "{CUBE}.SALSTERR"
+  #   type: string
+
+  # - name: SLPRSNID
+  #   sql: "{CUBE}.SLPRSNID"
+  #   type: string
+
+  # - name: UPSZONE
+  #   sql: "{CUBE}.UPSZONE"
+  #   type: string
+
+  # - name: TIMESPRT
+  #   sql: "{CUBE}.TIMESPRT"
+  #   type: number
+
+  # - name: VOIDSTTS
+  #   sql: "{CUBE}.VOIDSTTS"
+  #   type: number
+
+  # - name: ALLOCABY
+  #   sql: "{CUBE}.ALLOCABY"
+  #   type: number
+
+  # - name: NOTEINDX
+  #   sql: "{CUBE}.NOTEINDX"
+  #   type: number
+
+  # - name: CURNCYID
+  #   sql: "{CUBE}.CURNCYID"
+  #   type: string
+
+  # - name: CURRNIDX
+  #   sql: "{CUBE}.CURRNIDX"
+  #   type: number
+
+  # - name: RATETPID
+  #   sql: "{CUBE}.RATETPID"
+  #   type: string
+
+  # - name: EXGTBLID
+  #   sql: "{CUBE}.EXGTBLID"
+  #   type: string
+
+  # - name: XCHGRATE
+  #   sql: "{CUBE}.XCHGRATE"
+  #   type: number
+
+  # - name: DENXRATE
+  #   sql: "{CUBE}.DENXRATE"
+  #   type: number
+
+  # - name: EXCHDATE
+  #   sql: "{CUBE}.EXCHDATE"
+  #   type: time
+
+  # - name: TIME1
+  #   sql: "{CUBE}.TIME1"
+  #   type: time
+
+  # - name: RTCLCMTD
+  #   sql: "{CUBE}.RTCLCMTD"
+  #   type: number
+
+  # - name: MCTRXSTT
+  #   sql: "{CUBE}.MCTRXSTT"
+  #   type: number
+
+  # - name: TRXSORCE
+  #   sql: "{CUBE}.TRXSORCE"
+  #   type: string
+
+  # - name: SOPHDRE1
+  #   sql: "{CUBE}.SOPHDRE1"
+  #   type: string
+
+  # - name: SOPHDRE2
+  #   sql: "{CUBE}.SOPHDRE2"
+  #   type: string
+
+  # - name: SOPLNERR
+  #   sql: "{CUBE}.SOPLNERR"
+  #   type: string
+
+  # - name: SOPHDRFL
+  #   sql: "{CUBE}.SOPHDRFL"
+  #   type: string
+
+  # - name: COMMNTID
+  #   sql: "{CUBE}.COMMNTID"
+  #   type: string
+
+  # - name: REFRENCE
+  #   sql: "{CUBE}.REFRENCE"
+  #   type: string
+
+  # - name: POSTEDDT
+  #   sql: "{CUBE}.POSTEDDT"
+  #   type: time
+
+  # - name: PTDUSRID
+  #   sql: "{CUBE}.PTDUSRID"
+  #   type: string
+
+  # - name: USER2ENT
+  #   sql: "{CUBE}.USER2ENT"
+  #   type: string
+
+  # - name: CREATDDT
+  #   sql: "{CUBE}.CREATDDT"
+  #   type: time
+
+  # - name: MODIFDT
+  #   sql: "{CUBE}.MODIFDT"
+  #   type: time
+
+  # - name: Tax_Date
+  #   sql: "{CUBE}.Tax_Date"
+  #   type: time
+
+  # - name: APLYWITH
+  #   sql: "{CUBE}.APLYWITH"
+  #   type: number
+
+  # - name: WITHHAMT
+  #   sql: "{CUBE}.WITHHAMT"
+  #   type: number
+
+  # - name: SHPPGDOC
+  #   sql: "{CUBE}.SHPPGDOC"
+  #   type: number
+
+  # - name: CORRCTN
+  #   sql: "{CUBE}.CORRCTN"
+  #   type: number
+
+  # - name: SIMPLIFD
+  #   sql: "{CUBE}.SIMPLIFD"
+  #   type: number
+
+  # - name: DOCNCORR
+  #   sql: "{CUBE}.DOCNCORR"
+  #   type: string
+
+  # - name: SEQNCORR
+  #   sql: "{CUBE}.SEQNCORR"
+  #   type: number
+
+  # - name: SALEDATE
+  #   sql: "{CUBE}.SALEDATE"
+  #   type: time
+
+  # - name: EXCEPTIONALDEMAND
+  #   sql: "{CUBE}.EXCEPTIONALDEMAND"
+  #   type: number
+
+  # - name: Flags
+  #   sql: "{CUBE}.Flags"
+  #   type: number
+
+  # - name: SOPSTATUS
+  #   sql: "{CUBE}.SOPSTATUS"
+  #   type: number
+
+  # - name: SHIPCOMPLETE
+  #   sql: "{CUBE}.SHIPCOMPLETE"
+  #   type: number
+
+  # - name: DIRECTDEBIT
+  #   sql: "{CUBE}.DIRECTDEBIT"
+  #   type: number
+
+  # - name: WorkflowApprStatCreditLm
+  #   sql: "{CUBE}.WorkflowApprStatCreditLm"
+  #   type: number
+
+  # - name: WorkflowPriorityCreditLm
+  #   sql: "{CUBE}.WorkflowPriorityCreditLm"
+  #   type: number
+
+  # - name: WorkflowApprStatusQuote
+  #   sql: "{CUBE}.WorkflowApprStatusQuote"
+  #   type: number
+
+  # - name: WorkflowPriorityQuote
+  #   sql: "{CUBE}.WorkflowPriorityQuote"
+  #   type: number
+
+  # - name: Workflow_Status
+  #   sql: "{CUBE}.Workflow_Status"
+  #   type: number
+
+  # - name: ContractExchangeRateStat
+  #   sql: "{CUBE}.ContractExchangeRateStat"
+  #   type: number
+
+  # - name: Print_Phone_NumberGB
+  #   sql: "{CUBE}.Print_Phone_NumberGB"
+  #   type: number
+
+  # - name: DEX_ROW_TS
+  #   sql: "{CUBE}.DEX_ROW_TS"
+  #   type: time
+
+  # - name: DEX_ROW_ID
+  #   sql: "{CUBE}.DEX_ROW_ID"
+  #   type: number

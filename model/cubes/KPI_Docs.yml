@@ -1,0 +1,14 @@
+cubes:
+- name: KPI_Docs
+  extends: KPI_Docs_Base
+
+  measures:
+
+  # Avg Sale ($)
+
+  # Sales ($) / Sales (#)
+
+  - name: AVG_SALE_VALUE
+    sql: "CASE WHEN {CUBE.SALES_COUNT} > 0 THEN {CUBE.SALES_VALUE} / {CUBE.SALES_COUNT} ELSE 0 END"
+    type: number
+    format: currency

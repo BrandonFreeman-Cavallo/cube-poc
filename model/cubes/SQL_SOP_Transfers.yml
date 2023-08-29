@@ -5,7 +5,7 @@ cubes:
   public: false
 
   joins:
-  - name: SOP_Transfers
+  - name: SQL_SOP_Transfers
     relationship: many_to_one
     sql: "{SOP_Transfers}.SOPTYPE = {CUBE}.ORIGTYPE AND {SOP_Transfers}.SOPNUMBE = {CUBE}.ORIGNUMB"
 
@@ -55,7 +55,7 @@ cubes:
     sql: "{CUBE}.VOIDSTTS"
     type: number
 
-- name: SOP_Transfers
+- name: SQL_SOP_Transfers
   sql: "SELECT MSTRNUMB, SOPTYPE, SOPNUMBE, DOCDATE, VOIDSTTS, SOURCE = 'SOP10100'\nFROM SOP10100 doc WITH (NOLOCK) WHERE NOT EXISTS\n  (SELECT 1\n    FROM SOP30200 WITH (NOLOCK)\n    WHERE SOPTYPE = doc.SOPTYPE\n      AND SOPNUMBE = doc.SOPNUMBE )\nUNION  SELECT \n  MSTRNUMB, SOPTYPE, SOPNUMBE, DOCDATE, VOIDSTTS, SOURCE = 'SOP30200'\nFROM SOP30200 docHist WITH (NOLOCK)"
   data_source: default
 

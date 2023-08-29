@@ -1,0 +1,458 @@
+cubes:
+- name: SOPLINEJOIN2
+  sql: "SELECT \n  SOPTYPE,\n  SOPNUMBE,\n  LNITMSEQ,\n  CMPNTSEQ,\n  ITEMNMBR,\n  ITEMDESC,\n  NONINVEN,\n  DROPSHIP,\n  UOFM,\n  LOCNCODE,\n  UNITCOST,\n  ORUNTCST,\n  UNITPRCE,\n  ORUNTPRC,\n  XTNDPRCE,\n  OXTNDPRC,\n  REMPRICE,\n  OREPRICE,\n  EXTDCOST,\n  OREXTCST,\n  MRKDNAMT,\n  ORMRKDAM,\n  MRKDNPCT,\n  MRKDNTYP,\n  INVINDX,\n  CSLSINDX,\n  SLSINDX,\n  MKDNINDX,\n  RTNSINDX,\n  INUSINDX,\n  INSRINDX,\n  DMGDINDX,\n  ITMTSHID,\n  IVITMTXB,\n  BKTSLSAM,\n  ORBKTSLS,\n  TAXAMNT,\n  ORTAXAMT,\n  TXBTXAMT,\n  OTAXTAMT,\n  BSIVCTTL,\n  TRDISAMT,\n  ORTDISAM,\n  DISCSALE,\n  ORDAVSLS,\n  QUANTITY,\n  ATYALLOC,\n  QTYINSVC,\n  QTYINUSE,\n  QTYDMGED,\n  QTYRTRND,\n  QTYONHND,\n  QTYCANCE,\n  QTYCANOT,\n  QTYORDER,\n  QTYPRBAC,\n  QTYPRBOO,\n  QTYPRINV,\n  QTYPRORD,\n  QTYPRVRECVD,\n  QTYRECVD,\n  QTYREMAI,\n  QTYREMBO,\n  QTYTBAOR,\n  QTYTOINV,\n  QTYTORDR,\n  QTYFULFI,\n  QTYSLCTD,\n  QTYBSUOM,\n  EXTQTYAL,\n  EXTQTYSEL,\n  ReqShipDate,\n  FUFILDAT,\n  ACTLSHIP,\n  SHIPMTHD,\n  SALSTERR,\n  SLPRSNID,\n  PRCLEVEL,\n  COMMNTID,\n  BRKFLD1,\n  BRKFLD2,\n  BRKFLD3,\n  CURRNIDX,\n  TRXSORCE,\n  SOPLNERR,\n  ORGSEQNM,\n  ITEMCODE,\n  PURCHSTAT,\n  DECPLQTY,\n  DECPLCUR,\n  ODECPLCU,\n  EXCEPTIONALDEMAND,\n  TAXSCHID,\n  TXSCHSRC,\n  PRSTADCD,\n  ShipToName,\n  CITY,\n  STATE,\n  ZIPCODE,\n  CCode,\n  COUNTRY,\n  Flags,\n  CONTNBR,\n  CONTLNSEQNBR,\n  CONTSTARTDTE,\n  CONTENDDTE,\n  CONTITEMNBR,\n  CONTSERIALNBR,\n  ISLINEINTRA,\n  Print_Phone_NumberGB,\n  DEX_ROW_TS,\n  DEX_ROW_ID\nFROM SOP10200 AS a WITH (NOLOCK) WHERE NOT EXISTS\n   (SELECT 1\n    FROM SOP30300 WITH (NOLOCK)\n    WHERE SOPTYPE = a.SOPTYPE\n      AND SOPNUMBE = a.SOPNUMBE\n      AND LNITMSEQ = a.LNITMSEQ\n      AND CMPNTSEQ = a.CMPNTSEQ )\n UNION  SELECT \n  SOPTYPE,\n  SOPNUMBE,\n  LNITMSEQ,\n  CMPNTSEQ,\n  ITEMNMBR,\n  ITEMDESC,\n  NONINVEN,\n  DROPSHIP,\n  UOFM,\n  LOCNCODE,\n  UNITCOST,\n  ORUNTCST,\n  UNITPRCE,\n  ORUNTPRC,\n  XTNDPRCE,\n  OXTNDPRC,\n  REMPRICE,\n  OREPRICE,\n  EXTDCOST,\n  OREXTCST,\n  MRKDNAMT,\n  ORMRKDAM,\n  MRKDNPCT,\n  MRKDNTYP,\n  INVINDX,\n  CSLSINDX,\n  SLSINDX,\n  MKDNINDX,\n  RTNSINDX,\n  INUSINDX,\n  INSRINDX,\n  DMGDINDX,\n  ITMTSHID,\n  IVITMTXB,\n  BKTSLSAM,\n  ORBKTSLS,\n  TAXAMNT,\n  ORTAXAMT,\n  TXBTXAMT,\n  OTAXTAMT,\n  BSIVCTTL,\n  TRDISAMT,\n  ORTDISAM,\n  DISCSALE,\n  ORDAVSLS,\n  QUANTITY,\n  ATYALLOC,\n  QTYINSVC,\n  QTYINUSE,\n  QTYDMGED,\n  QTYRTRND,\n  QTYONHND,\n  QTYCANCE,\n  QTYCANOT,\n  QTYORDER,\n  QTYPRBAC,\n  QTYPRBOO,\n  QTYPRINV,\n  QTYPRORD,\n  QTYPRVRECVD,\n  QTYRECVD,\n  QTYREMAI,\n  QTYREMBO,\n  QTYTBAOR,\n  QTYTOINV,\n  QTYTORDR,\n  QTYFULFI,\n  QTYSLCTD,\n  QTYBSUOM,\n  EXTQTYAL,\n  EXTQTYSEL,\n  ReqShipDate,\n  FUFILDAT,\n  ACTLSHIP,\n  SHIPMTHD,\n  SALSTERR,\n  SLPRSNID,\n  PRCLEVEL,\n  COMMNTID,\n  BRKFLD1,\n  BRKFLD2,\n  BRKFLD3,\n  CURRNIDX,\n  TRXSORCE,\n  SOPLNERR,\n  ORGSEQNM,\n  ITEMCODE,\n  PURCHSTAT,\n  DECPLQTY,\n  DECPLCUR,\n  ODECPLCU,\n  EXCEPTIONALDEMAND,\n  TAXSCHID,\n  TXSCHSRC,\n  PRSTADCD,\n  ShipToName,\n  CITY,\n  STATE,\n  ZIPCODE,\n  CCode,\n  COUNTRY,\n  Flags,\n  CONTNBR,\n  CONTLNSEQNBR,\n  CONTSTARTDTE,\n  CONTENDDTE,\n  CONTITEMNBR,\n  CONTSERIALNBR,\n  ISLINEINTRA,\n  Print_Phone_NumberGB,\n  DEX_ROW_TS,\n  DEX_ROW_ID\nFROM SOP30300 WITH (NOLOCK)\n"
+  data_source: default
+
+  dimensions:
+  - name: SOPTYPE
+    sql: "{CUBE}.SOPTYPE"
+    type: number
+    public: true
+    primary_key: true
+
+  - name: SOPNUMBE
+    sql: "{CUBE}.SOPNUMBE"
+    type: string
+    public: true
+    primary_key: true
+
+  # - name: LNITMSEQ
+  #   sql: "{CUBE}.LNITMSEQ"
+  #   type: number
+
+  # - name: CMPNTSEQ
+  #   sql: "{CUBE}.CMPNTSEQ"
+  #   type: number
+
+  # - name: ITEMNMBR
+  #   sql: "{CUBE}.ITEMNMBR"
+  #   type: string
+
+  # - name: ITEMDESC
+  #   sql: "{CUBE}.ITEMDESC"
+  #   type: string
+
+  # - name: NONINVEN
+  #   sql: "{CUBE}.NONINVEN"
+  #   type: number
+
+  # - name: DROPSHIP
+  #   sql: "{CUBE}.DROPSHIP"
+  #   type: number
+
+  # - name: UOFM
+  #   sql: "{CUBE}.UOFM"
+  #   type: string
+
+  # - name: LOCNCODE
+  #   sql: "{CUBE}.LOCNCODE"
+  #   type: string
+
+  # - name: UNITCOST
+  #   sql: "{CUBE}.UNITCOST"
+  #   type: number
+
+  # - name: ORUNTCST
+  #   sql: "{CUBE}.ORUNTCST"
+  #   type: number
+
+  # - name: UNITPRCE
+  #   sql: "{CUBE}.UNITPRCE"
+  #   type: number
+
+  # - name: ORUNTPRC
+  #   sql: "{CUBE}.ORUNTPRC"
+  #   type: number
+
+  # - name: XTNDPRCE
+  #   sql: "{CUBE}.XTNDPRCE"
+  #   type: number
+
+  # - name: OXTNDPRC
+  #   sql: "{CUBE}.OXTNDPRC"
+  #   type: number
+
+  # - name: REMPRICE
+  #   sql: "{CUBE}.REMPRICE"
+  #   type: number
+
+  # - name: OREPRICE
+  #   sql: "{CUBE}.OREPRICE"
+  #   type: number
+
+  # - name: EXTDCOST
+  #   sql: "{CUBE}.EXTDCOST"
+  #   type: number
+
+  # - name: OREXTCST
+  #   sql: "{CUBE}.OREXTCST"
+  #   type: number
+
+  # - name: MRKDNAMT
+  #   sql: "{CUBE}.MRKDNAMT"
+  #   type: number
+
+  # - name: ORMRKDAM
+  #   sql: "{CUBE}.ORMRKDAM"
+  #   type: number
+
+  # - name: MRKDNPCT
+  #   sql: "{CUBE}.MRKDNPCT"
+  #   type: number
+
+  # - name: MRKDNTYP
+  #   sql: "{CUBE}.MRKDNTYP"
+  #   type: number
+
+  # - name: INVINDX
+  #   sql: "{CUBE}.INVINDX"
+  #   type: number
+
+  # - name: CSLSINDX
+  #   sql: "{CUBE}.CSLSINDX"
+  #   type: number
+
+  # - name: SLSINDX
+  #   sql: "{CUBE}.SLSINDX"
+  #   type: number
+
+  # - name: MKDNINDX
+  #   sql: "{CUBE}.MKDNINDX"
+  #   type: number
+
+  # - name: RTNSINDX
+  #   sql: "{CUBE}.RTNSINDX"
+  #   type: number
+
+  # - name: INUSINDX
+  #   sql: "{CUBE}.INUSINDX"
+  #   type: number
+
+  # - name: INSRINDX
+  #   sql: "{CUBE}.INSRINDX"
+  #   type: number
+
+  # - name: DMGDINDX
+  #   sql: "{CUBE}.DMGDINDX"
+  #   type: number
+
+  # - name: ITMTSHID
+  #   sql: "{CUBE}.ITMTSHID"
+  #   type: string
+
+  # - name: IVITMTXB
+  #   sql: "{CUBE}.IVITMTXB"
+  #   type: number
+
+  # - name: BKTSLSAM
+  #   sql: "{CUBE}.BKTSLSAM"
+  #   type: number
+
+  # - name: ORBKTSLS
+  #   sql: "{CUBE}.ORBKTSLS"
+  #   type: number
+
+  # - name: TAXAMNT
+  #   sql: "{CUBE}.TAXAMNT"
+  #   type: number
+
+  # - name: ORTAXAMT
+  #   sql: "{CUBE}.ORTAXAMT"
+  #   type: number
+
+  # - name: TXBTXAMT
+  #   sql: "{CUBE}.TXBTXAMT"
+  #   type: number
+
+  # - name: OTAXTAMT
+  #   sql: "{CUBE}.OTAXTAMT"
+  #   type: number
+
+  # - name: BSIVCTTL
+  #   sql: "{CUBE}.BSIVCTTL"
+  #   type: number
+
+  # - name: TRDISAMT
+  #   sql: "{CUBE}.TRDISAMT"
+  #   type: number
+
+  # - name: ORTDISAM
+  #   sql: "{CUBE}.ORTDISAM"
+  #   type: number
+
+  # - name: DISCSALE
+  #   sql: "{CUBE}.DISCSALE"
+  #   type: number
+
+  # - name: ORDAVSLS
+  #   sql: "{CUBE}.ORDAVSLS"
+  #   type: number
+
+  # - name: QUANTITY
+  #   sql: "{CUBE}.QUANTITY"
+  #   type: number
+
+  # - name: ATYALLOC
+  #   sql: "{CUBE}.ATYALLOC"
+  #   type: number
+
+  # - name: QTYINSVC
+  #   sql: "{CUBE}.QTYINSVC"
+  #   type: number
+
+  # - name: QTYINUSE
+  #   sql: "{CUBE}.QTYINUSE"
+  #   type: number
+
+  # - name: QTYDMGED
+  #   sql: "{CUBE}.QTYDMGED"
+  #   type: number
+
+  # - name: QTYRTRND
+  #   sql: "{CUBE}.QTYRTRND"
+  #   type: number
+
+  # - name: QTYONHND
+  #   sql: "{CUBE}.QTYONHND"
+  #   type: number
+
+  # - name: QTYCANCE
+  #   sql: "{CUBE}.QTYCANCE"
+  #   type: number
+
+  # - name: QTYCANOT
+  #   sql: "{CUBE}.QTYCANOT"
+  #   type: number
+
+  # - name: QTYORDER
+  #   sql: "{CUBE}.QTYORDER"
+  #   type: number
+
+  # - name: QTYPRBAC
+  #   sql: "{CUBE}.QTYPRBAC"
+  #   type: number
+
+  # - name: QTYPRBOO
+  #   sql: "{CUBE}.QTYPRBOO"
+  #   type: number
+
+  # - name: QTYPRINV
+  #   sql: "{CUBE}.QTYPRINV"
+  #   type: number
+
+  # - name: QTYPRORD
+  #   sql: "{CUBE}.QTYPRORD"
+  #   type: number
+
+  # - name: QTYPRVRECVD
+  #   sql: "{CUBE}.QTYPRVRECVD"
+  #   type: number
+
+  # - name: QTYRECVD
+  #   sql: "{CUBE}.QTYRECVD"
+  #   type: number
+
+  # - name: QTYREMAI
+  #   sql: "{CUBE}.QTYREMAI"
+  #   type: number
+
+  # - name: QTYREMBO
+  #   sql: "{CUBE}.QTYREMBO"
+  #   type: number
+
+  # - name: QTYTBAOR
+  #   sql: "{CUBE}.QTYTBAOR"
+  #   type: number
+
+  # - name: QTYTOINV
+  #   sql: "{CUBE}.QTYTOINV"
+  #   type: number
+
+  # - name: QTYTORDR
+  #   sql: "{CUBE}.QTYTORDR"
+  #   type: number
+
+  # - name: QTYFULFI
+  #   sql: "{CUBE}.QTYFULFI"
+  #   type: number
+
+  # - name: QTYSLCTD
+  #   sql: "{CUBE}.QTYSLCTD"
+  #   type: number
+
+  # - name: QTYBSUOM
+  #   sql: "{CUBE}.QTYBSUOM"
+  #   type: number
+
+  # - name: EXTQTYAL
+  #   sql: "{CUBE}.EXTQTYAL"
+  #   type: number
+
+  # - name: EXTQTYSEL
+  #   sql: "{CUBE}.EXTQTYSEL"
+  #   type: number
+
+  # - name: ReqShipDate
+  #   sql: "{CUBE}.ReqShipDate"
+  #   type: time
+
+  # - name: FUFILDAT
+  #   sql: "{CUBE}.FUFILDAT"
+  #   type: time
+
+  # - name: ACTLSHIP
+  #   sql: "{CUBE}.ACTLSHIP"
+  #   type: time
+
+  # - name: SHIPMTHD
+  #   sql: "{CUBE}.SHIPMTHD"
+  #   type: string
+
+  # - name: SALSTERR
+  #   sql: "{CUBE}.SALSTERR"
+  #   type: string
+
+  # - name: SLPRSNID
+  #   sql: "{CUBE}.SLPRSNID"
+  #   type: string
+
+  # - name: PRCLEVEL
+  #   sql: "{CUBE}.PRCLEVEL"
+  #   type: string
+
+  # - name: COMMNTID
+  #   sql: "{CUBE}.COMMNTID"
+  #   type: string
+
+  # - name: BRKFLD1
+  #   sql: "{CUBE}.BRKFLD1"
+  #   type: number
+
+  # - name: BRKFLD2
+  #   sql: "{CUBE}.BRKFLD2"
+  #   type: number
+
+  # - name: BRKFLD3
+  #   sql: "{CUBE}.BRKFLD3"
+  #   type: number
+
+  # - name: CURRNIDX
+  #   sql: "{CUBE}.CURRNIDX"
+  #   type: number
+
+  # - name: TRXSORCE
+  #   sql: "{CUBE}.TRXSORCE"
+  #   type: string
+
+  # - name: SOPLNERR
+  #   sql: "{CUBE}.SOPLNERR"
+  #   type: string
+
+  # - name: ORGSEQNM
+  #   sql: "{CUBE}.ORGSEQNM"
+  #   type: number
+
+  # - name: ITEMCODE
+  #   sql: "{CUBE}.ITEMCODE"
+  #   type: string
+
+  # - name: PURCHSTAT
+  #   sql: "{CUBE}.PURCHSTAT"
+  #   type: number
+
+  # - name: DECPLQTY
+  #   sql: "{CUBE}.DECPLQTY"
+  #   type: number
+
+  # - name: DECPLCUR
+  #   sql: "{CUBE}.DECPLCUR"
+  #   type: number
+
+  # - name: ODECPLCU
+  #   sql: "{CUBE}.ODECPLCU"
+  #   type: number
+
+  # - name: EXCEPTIONALDEMAND
+  #   sql: "{CUBE}.EXCEPTIONALDEMAND"
+  #   type: number
+
+  # - name: TAXSCHID
+  #   sql: "{CUBE}.TAXSCHID"
+  #   type: string
+
+  # - name: TXSCHSRC
+  #   sql: "{CUBE}.TXSCHSRC"
+  #   type: number
+
+  # - name: PRSTADCD
+  #   sql: "{CUBE}.PRSTADCD"
+  #   type: string
+
+  # - name: ShipToName
+  #   sql: "{CUBE}.ShipToName"
+  #   type: string
+
+  # - name: CITY
+  #   sql: "{CUBE}.CITY"
+  #   type: string
+
+  # - name: STATE
+  #   sql: "{CUBE}.STATE"
+  #   type: string
+
+  # - name: ZIPCODE
+  #   sql: "{CUBE}.ZIPCODE"
+  #   type: string
+
+  # - name: CCode
+  #   sql: "{CUBE}.CCode"
+  #   type: string
+
+  # - name: COUNTRY
+  #   sql: "{CUBE}.COUNTRY"
+  #   type: string
+
+  # - name: Flags
+  #   sql: "{CUBE}.Flags"
+  #   type: number
+
+  # - name: CONTNBR
+  #   sql: "{CUBE}.CONTNBR"
+  #   type: string
+
+  # - name: CONTLNSEQNBR
+  #   sql: "{CUBE}.CONTLNSEQNBR"
+  #   type: number
+
+  # - name: CONTSTARTDTE
+  #   sql: "{CUBE}.CONTSTARTDTE"
+  #   type: time
+
+  # - name: CONTENDDTE
+  #   sql: "{CUBE}.CONTENDDTE"
+  #   type: time
+
+  # - name: CONTITEMNBR
+  #   sql: "{CUBE}.CONTITEMNBR"
+  #   type: string
+
+  # - name: CONTSERIALNBR
+  #   sql: "{CUBE}.CONTSERIALNBR"
+  #   type: string
+
+  # - name: ISLINEINTRA
+  #   sql: "{CUBE}.ISLINEINTRA"
+  #   type: number
+
+  # - name: Print_Phone_NumberGB
+  #   sql: "{CUBE}.Print_Phone_NumberGB"
+  #   type: number
+
+  # - name: DEX_ROW_TS
+  #   sql: "{CUBE}.DEX_ROW_TS"
+  #   type: time
+
+  # - name: DEX_ROW_ID
+  #   sql: "{CUBE}.DEX_ROW_ID"
+  #   type: number
+

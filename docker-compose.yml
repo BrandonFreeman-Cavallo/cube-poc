@@ -21,6 +21,15 @@ services:
     ports:
       - "1433:1433"
     restart: on-failure:3
+    # command:
+    #   - /bin/sh
+    #   - -c
+    #   - |
+    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOPJOIN.sql"
+    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOPLINEJOIN.sql"
+    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOP_Transfers.sql"
+    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOP_Recombine.sql"
+    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOPVIEW_SalesPad_FINAL.sql"
 
   cube:
     container_name: cube

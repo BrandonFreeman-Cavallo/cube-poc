@@ -1,0 +1,71 @@
+cubes:
+- name: KPI_Lines
+  extends: SOPLINEJOIN
+
+  joins:
+  - name: SOPJOIN
+    relationship: many_to_one
+    sql: "{SOPJOIN.SOPTYPE} = {CUBE.SOPTYPE} AND {SOPJOIN.SOPNUMBE} = {CUBE.SOPNUMBE}"
+
+  # dimensions:
+  # - name: EXTDCOST
+  #   sql: "{CUBE}.EXTDCOST"
+  #   type: number
+
+  measures:
+
+  # Total Sales Lines
+
+  # SELECT COUNT(1)
+  # FROM SOPJOIN AS doc
+  # LEFT JOIN SOPLINEJOIN AS sli
+  #         ON doc.SOPNUMBE = sli.SOPNUMBE
+  #         AND doc.SOPTYPE = sli.SOPTYPE
+  # WHERE doc.VOIDSTTS = 0
+  # AND doc.SOPTYPE = 3
+  # AND sli.CMPNTSEQ = 0  --don't count kit components
+  # --AND PSTGSTUS = 2
+  # AND SOURCE = 'SOP30200'
+  # AND doc.GLPOSTDT BETWEEN @beginDate AND @endDate
+
+  - name: TOTAL_SALES_LINES
+    sql: "{CUBE.SOPNUMBE}"
+    type: count
+    format: number
+
+  # COGS($)
+
+  # SELECT SUM(sli.EXTDCOST)
+  # FROM SOPJOIN AS doc
+  # LEFT JOIN SOPLINEJOIN AS sli
+  #         ON doc.SOPNUMBE = sli.SOPNUMBE
+  #         AND doc.SOPTYPE = sli.SOPTYPE
+  # WHERE doc.VOIDSTTS = 0
+  # AND doc.SOPTYPE = 3
+  # --AND PSTGSTUS = 2
+  # AND SOURCE = 'SOP30200'
+  # AND doc.GLPOSTDT BETWEEN @beginDate AND @endDate
+
+  - name: COGS_VALUE
+    sql: "CASE WHEN {SOPJOIN.VOIDSTTS} = 0 AND {SOPJOIN.SOPTYPE} = 3 AND {SOPJOIN.SOURCE} = 'SOP30200' THEN {CUBE.EXTDCOST} ELSE '0' END"
+    type: sum
+    format: currency
+
+  # Invoice Lines (#)
+
+  # SELECT COUNT(1)
+  # FROM SOPJOIN AS doc
+  # LEFT JOIN SOPLINEJOIN AS sli
+  #         ON doc.SOPNUMBE = sli.SOPNUMBE
+  #         AND doc.SOPTYPE = sli.SOPTYPE
+  # WHERE doc.VOIDSTTS = 0
+  # AND doc.SOPTYPE = 3
+  # AND sli.CMPNTSEQ = 0  --don't count kit components
+  # AND PSTGSTUS = 2
+  # AND doc.DOCDATE BETWEEN @beginDate AND @endDate
+
+  - name: INVOICE_LINES_COUNT
+    sql: "CASE WHEN {SOPJOIN.VOIDSTTS} = 0 AND {SOPJOIN.SOPTYPE} = 3 AND {SOPJOIN.PSTGSTUS} = 2 AND {SOPJOIN.PSTGSTUS} = 2 THEN '1' ELSE '0' END"
+    type: SUM
+    format: number
+
