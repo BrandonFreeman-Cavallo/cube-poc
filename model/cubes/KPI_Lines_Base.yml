@@ -7,7 +7,7 @@ cubes:
     relationship: many_to_one
     sql: "{SOPJOIN.SOPTYPE} = {CUBE.SOPTYPE} AND {SOPJOIN.SOPNUMBE} = {CUBE.SOPNUMBE}"
 
-  # dimensions:
+  dimensions:
   # - name: EXTDCOST
   #   sql: "{CUBE}.EXTDCOST"
   #   type: number
@@ -65,7 +65,7 @@ cubes:
   # AND doc.DOCDATE BETWEEN @beginDate AND @endDate
 
   - name: INVOICE_LINES_COUNT
-    sql: "CASE WHEN {SOPJOIN.VOIDSTTS} = 0 AND {SOPJOIN.SOPTYPE} = 3 AND {SOPJOIN.PSTGSTUS} = 2 AND {SOPJOIN.PSTGSTUS} = 2 THEN '1' ELSE '0' END"
+    sql: "CASE WHEN {SOPJOIN.VOIDSTTS} = 0 AND {SOPJOIN.SOPTYPE} = 3 AND {SOPJOIN.PSTGSTUS} = 2 AND {SOPJOIN.PSTGSTUS} = 2 THEN 1 ELSE 0 END"
     type: SUM
     format: number
 

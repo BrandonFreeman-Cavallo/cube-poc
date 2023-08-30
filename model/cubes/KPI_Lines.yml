@@ -4,10 +4,10 @@ cubes:
 
   measures:
 
-  # Avg Lines per Invoice (#)
+# Avg Lines per Invoice (#)
 
-  # Invoice Lines (#) / Invoices (#)
+# Invoice Lines (#) / Invoices (#)
 
-  - name: AVG_LINES_PER_INVOICE
-    sql: "CASE WHEN {KPI_Lines_Base.INVOICE_COUNT} > 0 THEN {KPI_Lines_Base.INVOICE_LINES_COUNT} / {KPI_Lines_Base.INVOICE_COUNT} ELSE 0 END"
-    type: number
+# - name: AVG_LINES_PER_INVOICE
+#   sql: "CASE WHEN {KPI_Lines_Base.INVOICE_COUNT} > 0 THEN {KPI_Lines_Base.INVOICE_LINES_COUNT} / {KPI_Lines_Base.INVOICE_COUNT} ELSE 0 END"
+#   type: number

@@ -1,0 +1,21 @@
+# Sales ($)
+
+# SELECT SUM(SUBTOTAL - TRDISAMT)
+# FROM SOPJOIN
+# WHERE VOIDSTTS = 0
+# AND SOPTYPE = 3
+# --AND PSTGSTUS = 2
+# AND SOURCE = 'SOP30200'
+# AND GLPOSTDT BETWEEN @beginDate AND @endDate
+
+cubes:
+- name: Test_KPI_Sales_Value
+  sql: "SELECT SUM(SUBTOTAL - TRDISAMT) FROM SOPJOIN WHERE VOIDSTTS = 0 AND SOPTYPE = 3 AND SOURCE = 'SOP30200' AND GLPOSTDT BETWEEN @beginDate AND @endDate  \n"
+  data_source: default
+
+  dimensions:
+  - name: SalesValue
+    sql: "{CUBE}.SalesValue"
+    type: number
+    public: true
+    primary_key: true
