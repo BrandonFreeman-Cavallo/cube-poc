@@ -1,0 +1,73 @@
+cubes:
+- name: KPI_Docs_Base
+  extends: SOPJOIN
+
+  dimensions:
+  - name: SUBTOTAL
+    sql: "{CUBE}.SUBTOTAL"
+    type: number
+
+  - name: TRDISAMT
+    sql: "{CUBE}.TRDISAMT"
+    type: number
+
+  measures:
+
+  # Sales (#)
+
+  # SELECT COUNT(1)
+  # FROM SOPJOIN
+  # WHERE VOIDSTTS = 0
+  # AND SOPTYPE = 3
+  # --AND PSTGSTUS = 2
+  # AND SOURCE = 'SOP30200'
+  # AND GLPOSTDT BETWEEN @beginDate AND @endDate
+
+  - name: SALES_COUNT
+    sql: "CASE WHEN {CUBE.VOIDSTTS} = 0 AND {CUBE.SOPTYPE} = 3 AND {CUBE.SOURCE} = 'SOP30200' THEN 1 ELSE 0 END"
+    type: sum
+    format: number
+
+  # Sales ($)
+
+  # SELECT SUM(SUBTOTAL - TRDISAMT)
+  # FROM SOPJOIN
+  # WHERE VOIDSTTS = 0
+  # AND SOPTYPE = 3
+  # --AND PSTGSTUS = 2
+  # AND SOURCE = 'SOP30200'
+  # AND GLPOSTDT BETWEEN @beginDate AND @endDate
+
+  - name: SALES_VALUE
+    sql: "CASE WHEN {CUBE.VOIDSTTS} = 0 AND {CUBE.SOPTYPE} = 3 AND {CUBE.SOURCE} = 'SOP30200' THEN {CUBE.SUBTOTAL} - {CUBE.TRDISAMT} ELSE 0 END"
+    type: sum
+    format: currency
+
+  #Invoices (#)
+
+  # SELECT COUNT(DISTINCT(MSTRNUMB))
+  # FROM SOPJOIN
+  # WHERE VOIDSTTS = 0
+  # AND SOPTYPE = 3
+  # AND PSTGSTUS = 2
+  # AND DOCDATE BETWEEN @beginDate AND @endDate
+
+
+  - name: INVOICE_COUNT
+    sql: "CASE WHEN {CUBE.VOIDSTTS} = 0 AND {CUBE.SOPTYPE} = 3 AND {CUBE.PSTGSTUS} = 2 THEN {CUBE}.MSTRNUMB END"
+    type: count_distinct
+    format: number
+
+  # Invoices ($)
+
+  # SELECT SUM(SUBTOTAL - TRDISAMT)
+  # FROM SOPJOIN
+  # WHERE VOIDSTTS = 0
+  # AND SOPTYPE = 3
+  # AND PSTGSTUS = 2
+  # AND DOCDATE BETWEEN @beginDate AND @endDate
+
+  - name: INVOICE_VALUE
+    sql: "CASE WHEN {CUBE.VOIDSTTS} = 0 AND {CUBE.SOPTYPE} = 3 AND {CUBE.PSTGSTUS} = 2 THEN {CUBE.SUBTOTAL} - {CUBE.TRDISAMT} ELSE '0' END"
+    type: sum
+    format: number
