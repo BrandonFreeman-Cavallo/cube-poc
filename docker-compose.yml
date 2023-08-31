@@ -5,37 +5,63 @@ networks:
     external: false
 
 services:
-  sql-server:
-    container_name: sql-server
-    # image: mcr.microsoft.com/mssql/server:2022-latest
+  # mssql-server:
+  #   container_name: mssql-server
+  #   # image: mcr.microsoft.com/mssql/server:2022-latest
+  #   build:
+  #     context: ./mssql
+  #     dockerfile: Dockerfile
+  #   healthcheck:
+  #     test: ["CMD", "sqlcmd", "-q", "SELECT 1"]
+  #     interval: 5s
+  #     timeout: 2s
+  #     retries: 15
+  #   networks:
+  #     - cube-net
+  #   ports:
+  #     - "1433:1433"
+  #   restart: on-failure:3
+
+  mysql-server:
+    container_name: mysql-server
     build:
-      context: ./mssql
+      context: ./starrocks
       dockerfile: Dockerfile
-    healthcheck:
-      test: ["CMD", "sqlcmd", "-q", "SELECT 1"]
-      interval: 5s
-      timeout: 2s
-      retries: 15
+    # healthcheck:
+    #   test: ["CMD", "sqlcmd", "-q", "SELECT 1"]
+    #   interval: 5s
+    #   timeout: 2s
+    #   retries: 15
     networks:
       - cube-net
     ports:
-      - "1433:1433"
+      - "9030:9030"
+      - "8030:8030"
+      - "8040:8040"
     restart: on-failure:3
-    # command:
-    #   - /bin/sh
-    #   - -c
-    #   - |
-    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOPJOIN.sql"
-    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOPLINEJOIN.sql"
-    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOP_Transfers.sql"
-    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOP_Recombine.sql"
-    #     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -i "/var/opt/mssql/files/SOPVIEW_SalesPad_FINAL.sql"
+    dns:
+      - 8.8.8.8
+      - 4.4.4.4
+
+  migrations:
+    container_name: migrations
+    build:
+      context: ./migration
+      dockerfile: Dockerfile
+    environment:
+      - DBHOST=mysql-server
+      - DBPORT=9030
+    networks:
+      - cube-net
+    dns:
+      - 8.8.8.8
+      - 4.4.4.4
 
   cube:
     container_name: cube
     image: cubejs/cube:latest
     depends_on:
-      - sql-server
+      - mysql-server
     ports:
       - 4000:4000
       - 15432:15432
