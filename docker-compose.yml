@@ -70,6 +70,6 @@ services:
     networks:
       - cube-net
     volumes:
-      - ./.env:/cube/conf/.env
-      - ./model:/cube/conf/model:ro
+      - ./starrocks/env:/cube/conf/.env
+      - ./starrocks/model:/cube/conf/model:ro
     restart: on-failure:3

@@ -1,6 +1,6 @@
 cubes:
 - name: SOPLINEJOIN
-  sql_table: dbo.SOPLINEJOIN
+  sql_table: SOPLINEJOIN
   data_source: default
 
   dimensions:

@@ -1,6 +1,6 @@
 cubes:
 - name: SOPJOIN
-  sql_table: dbo.SOPJOIN
+  sql_table: SOPJOIN
   data_source: default
 
   dimensions:
